@@ -1,0 +1,3237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniLearn Pro</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0a0a0a;
+    color:white;
+}
+
+/* HEADER */
+header{
+    position:sticky;
+    top:0;
+    background:#111;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #222;
+}
+
+h1{
+    margin:0;
+    color:#00ff99;
+    font-size:18px;
+}
+
+/* MENU */
+#menu{
+    padding:20px;
+}
+
+.category{
+    margin-bottom:25px;
+}
+
+.category h2{
+    color:#00ff99;
+    font-size:16px;
+    border-left:3px solid #00ff99;
+    padding-left:10px;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:10px;
+}
+
+/* BUTTON */
+button{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#1e1e1e;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00ff99;
+    color:black;
+}
+
+/* LECON */
+#lesson{
+    padding:20px;
+}
+
+.card{
+    background:#111;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #222;
+}
+
+.hidden{display:none;}
+
+.tag{
+    font-size:12px;
+    color:#00ff99;
+    margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>OmniLearn Pro</h1>
+<button onclick="backMenu()">Menu</button>
+</header>
+
+<div id="menu"></div>
+
+<div id="lesson" class="hidden">
+<div class="card">
+<div class="tag" id="category"></div>
+<h2 id="title"></h2>
+<p id="text"></p>
+</div>
+</div>
+
+<script>
+
+/* =========================
+   📚 BASE DE DONNÉES
+   ========================= */
+
+const data = {
+"Logiciel": [
+{title:"Windows",text:``},
+{title:"Linux",text:`🐧 Leçon sur Linux
+Linux est un système d’exploitation comme Windows ou macOS, mais il est open-source (modifiable et gratuit).
+👉 En simple : Linux est un système très utilisé pour les serveurs, la cybersécurité et le développement.
+🧠 1. C’est quoi Linux ?
+Linux est :
+un système d’exploitation 🖥️
+basé sur le noyau Linux (kernel)
+utilisé sur PC, serveurs, smartphones, objets connectés
+👉 Contrairement à Windows/macOS, il est ouvert et personnalisable.
+🌍 2. Où on utilise Linux ?
+Linux est partout :
+serveurs web 🌐
+cloud ☁️
+cybersécurité 🔐
+supercalculateurs 🧠
+Android 📱 (basé sur Linux)
+🧩 3. Les distributions (distros)
+Linux existe en plusieurs versions appelées distributions :
+Ubuntu 🟠 (simple pour débutants)
+Debian ⚙️ (stable)
+Fedora 🔵 (moderne)
+Kali Linux 🕵️ (cybersécurité)
+👉 Chaque distro = Linux + outils + interface différente
+🖥️ 4. Interface Linux
+Linux peut avoir :
+interface graphique (comme Windows)
+ou mode texte (terminal)
+👉 Les serveurs utilisent souvent uniquement le terminal.
+⚙️ 5. Le Terminal (très important)
+Le terminal Linux est l’outil principal pour :
+gérer les fichiers
+installer des logiciels
+configurer le système
+automatiser des tâches
+👉 Linux est très puissant en ligne de commande.
+📁 6. Organisation des fichiers
+Linux organise tout sous forme de dossiers :
+système
+utilisateurs
+programmes
+configurations
+👉 Tout est structuré comme un arbre.
+🔐 7. Sécurité Linux
+Linux est connu pour être sécurisé grâce à :
+permissions strictes
+séparation des utilisateurs
+moins de virus que Windows
+contrôle avancé du système
+☁️ 8. Linux et serveurs
+Linux est le système le plus utilisé pour les serveurs car :
+stable
+rapide
+léger
+fiable
+👉 Internet fonctionne en grande partie sur Linux.
+🧑‍💻 9. Linux pour développeurs
+Linux est très apprécié pour :
+programmation (Python, C, JavaScript)
+Git et DevOps
+Docker et conteneurs
+serveurs cloud
+🔁 10. Linux vs autres systèmes
+Système
+Avantages
+Linux 🐧
+gratuit, puissant, serveur
+Windows 🪟
+jeux, logiciels grand public
+macOS 🍎
+design, écosystème Apple
+🧩 11. À retenir
+Linux, c’est :
+🐧 un système d’exploitation libre, puissant et très utilisé dans les serveurs et la tech
+🚀 12. Apprentissage simple de Linux
+comprendre les distributions
+apprendre le terminal
+gérer fichiers et permissions
+installer logiciels
+automatiser (scripts)
+dev / serveur / cloud`},
+{title:"MacOS",text:`🍎 Leçon sur macOS
+macOS est le système d’exploitation développé par Apple pour ses ordinateurs Mac.
+👉 En simple : c’est le logiciel principal qui fait fonctionner un Mac (comme Windows sur PC).
+🧠 1. À quoi sert macOS ?
+macOS gère :
+les applications 💻
+les fichiers 📁
+l’interface graphique 🖥️
+le matériel (clavier, Wi-Fi, disque dur)
+👉 Sans macOS, un Mac ne peut rien faire.
+🖥️ 2. Interface de macOS
+macOS est connu pour être simple et fluide :
+Bureau : écran principal
+Dock : barre en bas avec les apps
+Finder : gestion des fichiers
+Barre de menu : en haut de l’écran
+📁 3. Finder (gestion des fichiers)
+Le Finder permet de :
+ouvrir des dossiers
+organiser des fichiers
+rechercher des documents
+👉 C’est l’équivalent de “Explorateur de fichiers” sur Windows.
+⚙️ 4. Applications sur macOS
+Tu peux installer :
+apps du Mac App Store
+logiciels téléchargés sur internet
+Exemples :
+Safari 🌐 (navigateur)
+Notes 📝
+Photos 📸
+Terminal ⚙️
+🧩 5. Terminal (important pour Dev / hacking éthique)
+Le Terminal permet de taper des commandes texte.
+👉 Il est utilisé pour :
+programmer
+gérer des fichiers
+utiliser Git
+faire du DevOps
+🔐 6. Sécurité sur macOS
+macOS est considéré comme sécurisé grâce à :
+système fermé (Apple contrôle les apps)
+permissions strictes
+protection contre les malwares
+sandbox des applications
+☁️ 7. iCloud et écosystème Apple
+macOS est connecté à iCloud :
+sauvegarde des fichiers ☁️
+synchronisation iPhone / iPad
+mots de passe Apple
+⚡ 8. macOS et performance
+macOS est optimisé pour :
+fluidité
+stabilité
+batterie (MacBook)
+matériel Apple
+🧑‍💻 9. macOS pour développeurs
+macOS est très utilisé en informatique car il permet :
+utiliser Git
+coder (Python, JavaScript, etc.)
+utiliser Docker
+accéder à un terminal UNIX
+🔁 10. macOS vs autres systèmes
+Système
+Avantages
+macOS 🍎
+stable, design, dev-friendly
+Windows 🪟
+compatible jeux/logiciels
+Linux 🐧
+open-source, très puissant
+🧩 11. À retenir
+macOS, c’est :
+🍎 un système d’exploitation stable et sécurisé pour les ordinateurs Apple
+🚀 12. Apprentissage simple macOS
+interface (Dock, Finder)
+gestion des fichiers
+installation d’applications
+Terminal
+outils dev (Git, Node, Docker)`},
+{title:"Git",text:`🧭 Leçon sur Git
+Git est un système de gestion de versions qui permet de suivre les modifications d’un projet (souvent du code).
+👉 En simple : Git sert à garder l’historique complet de ton travail et revenir en arrière si besoin.
+🧠 1. Pourquoi Git existe ?
+Sans Git :
+tu modifies ton code
+tu casses quelque chose
+impossible de revenir facilement en arrière ❌
+Avec Git :
+chaque changement est sauvegardé
+tu peux revenir à une version précédente
+tu peux tester sans risque
+🔁 2. Comment Git fonctionne ?
+Git fonctionne comme une suite de “photos” du projet :
+chaque modification = une nouvelle version
+tu peux avancer ou revenir dans le temps
+👉 Ces versions s’appellent des commits.
+📦 3. Les commits
+Un commit est une sauvegarde de ton projet à un instant donné.
+👉 Il contient :
+les fichiers modifiés
+un message (ce que tu as changé)
+un identifiant unique
+🌿 4. Les branches
+Une branche permet de travailler sur une version parallèle du projet.
+👉 Exemple :
+branche principale = version stable
+autre branche = nouvelles fonctionnalités
+👉 Ça évite de casser le projet principal.
+🔀 5. Fusion (merge)
+Le merge sert à :
+prendre une branche
+la fusionner avec une autre
+👉 Exemple :
+tu testes une nouvelle fonction → tu la valides → tu la fusionnes au projet principal
+🧱 6. Dépôt (repository)
+Un repository (repo) est un dossier de projet suivi par Git.
+Il contient :
+le code
+l’historique
+les branches
+les commits
+☁️ 7. Git local vs distant
+Git local : sur ton ordinateur 💻
+Git distant : sur un serveur (ex: GitHub)
+👉 Les deux peuvent être synchronisés.
+🔁 8. Cycle de travail Git
+Le fonctionnement classique :
+modifier le code
+sauvegarder en commit
+créer une branche si besoin
+fusionner si tout marche
+envoyer vers un serveur
+🛡️ 9. Pourquoi Git est important ?
+Git permet :
+éviter de perdre du travail
+travailler en équipe
+tester sans danger
+organiser les versions
+🌍 10. Git dans la vraie vie
+Git est utilisé pour :
+sites web 🌐
+applications 📱
+jeux vidéo 🎮
+intelligence artificielle 🤖
+projets open-source
+🧩 11. À retenir
+Git, c’est :
+🧭 un système qui permet de sauvegarder, suivre et gérer toutes les versions d’un projet
+🚀 12. Apprentissage simple de Git
+comprendre les commits
+comprendre les branches
+apprendre le merge
+gérer un repository
+travailler avec GitHub`},
+{title:"GitHub",text:`🐙 Leçon sur GitHub
+GitHub est une plateforme en ligne qui permet de stocker, gérer et partager du code.
+👉 En simple : c’est un réseau social pour développeurs, basé sur le code.
+🧠 1. À quoi sert GitHub ?
+GitHub permet de :
+sauvegarder du code 💾
+travailler en équipe 👥
+suivre les modifications 🔁
+corriger des bugs 🐛
+partager des projets 🌍
+🔁 2. Git vs GitHub
+Outil
+Rôle
+Git
+système de gestion de version (local)
+GitHub
+plateforme en ligne qui utilise Git
+👉 Git = moteur
+👉 GitHub = site web qui l’utilise
+📦 3. Les dépôts (repositories)
+Un repository (repo) est un dossier de projet contenant :
+code
+fichiers
+historique des modifications
+👉 C’est la base d’un projet GitHub.
+🔄 4. Les commits
+Un commit est une sauvegarde du code à un moment précis.
+👉 Exemple mental :
+tu modifies ton projet
+tu “enregistres une version”
+tu peux revenir en arrière si besoin
+🌿 5. Les branches
+Une branche permet de travailler sur une version parallèle du projet.
+👉 Exemple :
+branche principale = version stable
+autre branche = tests ou nouvelles fonctionnalités
+🤝 6. Collaboration
+GitHub est très utilisé en équipe :
+plusieurs développeurs travaillent sur le même projet
+ils proposent des changements
+ces changements sont validés ou refusés
+🔀 7. Pull Request
+Une pull request sert à :
+proposer un changement de code
+demander validation à l’équipe
+👉 C’est comme dire :
+“J’ai amélioré le projet, vous validez ?”
+🐛 8. Issues (problèmes)
+Les issues servent à :
+signaler un bug
+proposer une idée
+suivre les tâches
+☁️ 9. Pourquoi GitHub est important ?
+GitHub permet :
+travail en équipe à distance
+sauvegarde sécurisée du code
+historique complet des projets
+collaboration mondiale
+🌍 10. GitHub dans la vraie vie
+GitHub est utilisé pour :
+applications mobiles 📱
+sites web 🌐
+jeux vidéo 🎮
+IA 🤖
+projets open-source
+🧩 11. À retenir
+GitHub, c’est :
+🐙 une plateforme en ligne pour stocker, partager et collaborer sur du code
+🚀 12. Chemin simple pour apprendre
+comprendre Git (versions)
+créer un repo
+faire des commits
+utiliser des branches
+collaborer (pull requests)
+gérer des projets complets`},
+{title:"Docker",text:`🐳 Leçon sur Docker
+Docker est un outil qui permet de créer, transporter et exécuter des applications dans des environnements isolés appelés conteneurs.
+👉 En simple : Docker permet de faire tourner une application comme si elle était dans une “boîte” indépendante, toujours identique partout.
+🧠 1. Pourquoi Docker existe ?
+Avant Docker :
+une application marche sur ton PC ❌
+mais pas sur un autre serveur ❌
+problèmes de versions, dépendances, configuration
+👉 Résultat : “ça marche chez moi” 😅
+Avec Docker :
+même environnement partout
+installation identique
+pas de conflits
+👉 “ça marche partout” ✅
+📦 2. C’est quoi un conteneur ?
+Un conteneur est une petite “machine virtuelle légère” qui contient :
+ton application
+ses dépendances
+sa configuration
+👉 Mais contrairement à une vraie machine virtuelle :
+c’est plus léger
+plus rapide
+partage le système de base
+🖥️ 3. Docker vs machine virtuelle
+Docker (conteneur)
+Machine virtuelle
+léger ⚡
+lourd 🐢
+rapide
+plus lent
+partage l’OS
+OS complet séparé
+facile à déployer
+plus complexe
+🔁 4. Comment fonctionne Docker ?
+Le principe :
+tu crées une image (modèle de ton app)
+tu lances un conteneur (instance de l’image)
+ton application tourne dedans
+👉 Image = plan
+👉 Conteneur = exécution
+🧱 5. Image Docker
+Une image contient :
+ton code
+les bibliothèques nécessaires
+les paramètres de base
+👉 C’est un “pack prêt à utiliser”
+🚀 6. Conteneur Docker
+Un conteneur est :
+une application en cours d’exécution
+isolée des autres programmes
+stable et reproductible
+🌐 7. À quoi sert Docker ?
+Docker est utilisé pour :
+développer des applications
+tester des logiciels
+déployer des serveurs
+faire du cloud
+travailler en DevOps
+⚙️ 8. Exemple concret
+Sans Docker :
+tu installes Node.js, Python, bases de données
+problèmes de compatibilité
+Avec Docker :
+tu lances un conteneur prêt à l’emploi
+tout est déjà configuré
+☁️ 9. Docker et DevOps
+Docker est essentiel en DevOps :
+déploiement rapide
+environnements identiques
+automatisation CI/CD
+👉 souvent combiné avec Kubernetes
+🧩 10. À retenir
+Docker, c’est :
+🐳 un outil qui permet de faire tourner des applications dans des conteneurs isolés et portables
+🚀 11. Pourquoi c’est puissant ?
+fonctionne partout
+évite les bugs d’environnement
+facilite le travail en équipe
+accélère les déploiements`},
+{title:"DevOps",text:`⚙️ Leçon sur le DevOps
+Le DevOps est une méthode de travail en informatique qui vise à rapprocher les développeurs (Dev) et les équipes d’exploitation (Ops) pour créer et déployer des logiciels plus rapidement et plus efficacement.
+👉 En simple : DevOps = faire collaborer ceux qui créent le logiciel et ceux qui le font fonctionner.
+🧠 1. Pourquoi DevOps existe ?
+Avant DevOps :
+les développeurs créaient le logiciel
+une autre équipe le déployait
+communication lente ❌
+erreurs fréquentes ❌
+mises à jour longues ❌
+👉 DevOps a été créé pour accélérer et simplifier tout ça.
+🔁 2. Le principe de DevOps
+DevOps suit un cycle continu :
+créer du code
+tester automatiquement
+déployer sur un serveur
+surveiller le système
+améliorer en continu
+👉 C’est un processus en boucle.
+🚀 3. Objectifs principaux
+DevOps sert à :
+livrer des logiciels plus vite
+réduire les bugs
+automatiser les tâches répétitives
+améliorer la stabilité des systèmes
+faciliter les mises à jour
+🤝 4. Dev vs Ops
+👨‍💻 Dev (développeurs)
+écrivent le code
+créent les fonctionnalités
+corrigent les bugs
+🖥️ Ops (exploitation)
+gèrent les serveurs
+déploient les applications
+surveillent la performance
+👉 DevOps = fusion de ces deux mondes.
+⚙️ 5. Automatisation (très important)
+DevOps repose énormément sur l’automatisation :
+tests automatiques
+déploiement automatique
+surveillance automatique
+👉 objectif : éviter les tâches manuelles répétitives.
+📦 6. Exemple simple
+Sans DevOps :
+une mise à jour prend des jours
+Avec DevOps :
+une mise à jour peut être déployée en quelques minutes
+☁️ 7. DevOps et cloud
+DevOps est souvent utilisé avec le cloud :
+serveurs en ligne
+infrastructures flexibles
+déploiement rapide
+🧰 8. Outils DevOps (exemples connus)
+gestion de code (Git)
+automatisation (CI/CD)
+conteneurs (Docker)
+orchestration (Kubernetes)
+monitoring (surveillance des systèmes)
+🔄 9. CI/CD (concept clé)
+CI (Continuous Integration) : intégrer et tester le code en continu
+CD (Continuous Delivery/Deployment) : déployer automatiquement
+👉 but : livraison rapide et fiable
+🛡️ 10. Pourquoi DevOps est important ?
+moins d’erreurs humaines
+déploiements plus rapides
+meilleure stabilité
+travail plus fluide entre équipes
+🧩 11. À retenir
+DevOps, c’est :
+⚙️ une méthode qui automatise et relie développement + déploiement pour améliorer la production logicielle
+🚀 12. Parcours simple pour apprendre DevOps
+bases Linux
+Git (version de code)
+réseau et serveurs
+CI/CD
+conteneurs (Docker)
+cloud et monitoring`}
+],
+
+"Web": [
+{title:"HTML",text:`Le HTML (HyperText Markup Language) est le langage de base utilisé pour créer la structure d’une page web.
+👉 En simple : HTML = le squelette d’un site internet.
+🧠 1. À quoi sert HTML ?
+HTML sert à organiser une page web en éléments :
+titres
+paragraphes
+images
+liens
+boutons
+sections
+👉 Sans HTML, il n’y aurait aucune page web.
+🧱 2. Comment fonctionne HTML ?
+HTML fonctionne avec des éléments (balises).
+Chaque élément dit au navigateur :
+“ceci est un titre”
+“ceci est une image”
+“ceci est un texte”
+👉 C’est comme construire une maison avec des briques.
+🧩 3. La structure d’une page
+Une page HTML est organisée comme un plan :
+une partie “invisible” (informations du site)
+une partie “visible” (ce que tu vois à l’écran)
+🖼️ 4. Les éléments principaux
+🏷️ Titres
+Ils servent à organiser le contenu :
+titre principal
+sous-titres
+✍️ Texte
+HTML permet d’écrire :
+paragraphes
+descriptions
+articles
+🔗 Liens
+Les liens permettent de naviguer :
+vers d’autres pages
+vers d’autres sites
+🖼️ Images
+HTML permet d’afficher :
+photos
+illustrations
+icônes
+🎛️ Boutons
+Les boutons permettent :
+cliquer
+envoyer des actions
+interagir avec la page
+🌐 5. Rôle de HTML sur internet
+HTML est utilisé partout :
+sites web
+applications web
+blogs
+réseaux sociaux
+👉 Chaque site que tu vois utilise HTML.
+⚙️ 6. HTML seul ne suffit pas
+HTML fait seulement la structure :
+HTML → structure 🧱
+CSS → style 🎨
+JavaScript → interaction ⚡
+👉 Les 3 ensemble créent un site complet.
+📱 7. HTML et navigation
+Grâce à HTML :
+tu peux passer d’une page à une autre
+organiser des menus
+créer des sections claires
+🧩 8. À retenir
+HTML, c’est :
+🌐 le langage qui construit la structure d’une page web
+🚀 9. Apprentissage simple du HTML
+comprendre la structure d’une page
+apprendre les titres et textes
+ajouter des images et liens
+organiser des sections
+créer des pages complètes`},
+{title:"CSS",text:`Le CSS (Cascading Style Sheets) est un langage qui sert à mettre en forme une page web.
+👉 En simple :
+HTML = structure, CSS = design, style et apparence.
+🧠 1. À quoi sert le CSS ?
+Le CSS permet de modifier :
+les couleurs 🎨
+les tailles de texte 🔠
+les positions des éléments 📍
+les espacements 📏
+les animations ✨
+👉 Sans CSS, toutes les pages web seraient très simples et “brutes”.
+🖼️ 2. Comment fonctionne le CSS ?
+Le CSS fonctionne comme des règles de style :
+👉 “Pour tel élément, appliquer tel style”
+Exemple mental :
+tous les titres en rouge
+tous les boutons en bleu
+le texte centré
+🧱 3. Les sélecteurs (cibler les éléments)
+Le CSS doit savoir quoi modifier :
+titres
+paragraphes
+boutons
+images
+👉 Chaque élément peut recevoir un style différent.
+🎨 4. Les couleurs
+Le CSS permet de changer :
+couleur du texte
+couleur du fond
+bordures
+👉 C’est ce qui donne l’identité visuelle d’un site.
+🔠 5. Les polices (textes)
+Le CSS permet de :
+changer le style d’écriture
+ajuster la taille
+mettre en gras ou en italique
+améliorer la lisibilité
+📐 6. Positionnement
+Le CSS gère où les éléments apparaissent :
+en haut / en bas
+au centre
+côte à côte
+en grille ou en colonne
+👉 C’est ce qui organise toute la page.
+📦 7. Espacements
+Le CSS contrôle :
+l’espace autour des éléments
+l’espace entre les éléments
+👉 Sans ça, tout serait collé et illisible.
+✨ 8. Animations et effets
+Le CSS peut ajouter :
+transitions douces
+effets au survol
+mouvements simples
+👉 Ça rend les sites plus modernes et vivants.
+📱 9. Responsive design (très important)
+Le CSS permet d’adapter un site à :
+téléphone 📱
+tablette 📲
+ordinateur 💻
+👉 Un bon site doit fonctionner sur tous les écrans.
+🎯 10. Pourquoi le CSS est important ?
+Sans CSS :
+site moche et basique
+difficile à lire
+mauvaise expérience utilisateur
+Avec CSS :
+site propre
+agréable
+professionnel
+🧩 11. À retenir
+Le CSS, c’est :
+🎨 le langage qui contrôle le design et l’apparence d’un site web
+🚀 12. Apprentissage simple du CSS
+couleurs et texte
+tailles et polices
+positionnement
+espaces
+responsive design
+animations`},
+{title:"JavaScript",text:`JavaScript est un langage qui permet de rendre un site web interactif.
+👉 Si HTML construit la page et CSS la rend jolie, JavaScript fait fonctionner la page.
+🌐 1. À quoi sert JavaScript ?
+JavaScript sert à :
+réagir aux clics (boutons, menus)
+afficher des messages ou notifications
+modifier une page en direct
+créer des jeux ou animations
+envoyer / recevoir des données depuis internet
+🧠 2. Comment “pense” JavaScript ?
+JavaScript fonctionne comme une suite d’instructions :
+👉 “si ceci arrive, alors fais cela”
+Exemple mental :
+si tu cliques → afficher un message
+si une valeur change → mettre à jour la page
+répéter une action plusieurs fois
+📦 3. Les variables (stockage d’informations)
+Une variable sert à mémoriser une donnée :
+un prénom
+un âge
+un score de jeu
+👉 C’est comme une boîte qui contient une information.
+🔁 4. Les conditions
+Les conditions permettent de prendre des décisions :
+si une condition est vraie → action A
+sinon → action B
+👉 Exemple logique :
+si tu as assez d’argent → acheter
+sinon → ne pas acheter
+🔄 5. Les boucles
+Les boucles servent à répéter une action automatiquement :
+afficher plusieurs éléments
+compter
+répéter une animation
+👉 Sans boucle, il faudrait tout faire manuellement.
+⚙️ 6. Les fonctions
+Une fonction est un bloc d’actions réutilisable :
+tu la définis une fois
+tu peux l’utiliser quand tu veux
+👉 Exemple mental : “faire une action précise quand on l’appelle”
+🌍 7. JavaScript et la page web (DOM)
+Le DOM est la structure d’une page web.
+JavaScript peut :
+modifier du texte
+changer des couleurs
+ajouter ou supprimer des éléments
+réagir aux interactions utilisateur
+👉 C’est comme si JavaScript pouvait “réécrire” la page en direct.
+📡 8. JavaScript et internet (API)
+JavaScript peut communiquer avec des serveurs :
+météo
+réseaux sociaux
+jeux en ligne
+login / comptes
+👉 Il envoie des demandes et reçoit des réponses.
+🎮 9. Exemple concret de projet
+Avec JavaScript tu peux créer :
+un compteur de clics
+un mini jeu
+un système de score
+une barre de recherche interactive
+🛡️ 10. Erreurs fréquentes des débutants
+vouloir aller trop vite
+ne pas comprendre la logique (conditions / variables)
+mélanger HTML, CSS et JavaScript sans organisation
+copier sans comprendre
+🧩 11. À retenir
+JavaScript, c’est :
+🟨 le langage qui donne vie aux sites web
+👉 il permet de transformer une page statique en application interactive
+🚀 12. Plan d’apprentissage simple
+logique (conditions)
+stockage (variables)
+répétition (boucles)
+actions (fonctions)
+interaction avec la page (DOM)
+communication internet (API)`},
+{title:"API",text:`🔌 Leçon sur les API (Application Programming Interface)
+Une API est un système qui permet à deux logiciels de communiquer entre eux.
+👉 En simple : c’est un serveur qui permet à une application de demander et recevoir des données d’une autre application.
+🧠 1. Exemple simple
+Imagine un restaurant 🍔 :
+toi = application
+serveur = API
+cuisine = serveur / base de données
+👉 Tu commandes :
+“Je veux un burger”
+👉 Le serveur (API) va chercher la réponse et te la ramène.
+🌐 2. Comment fonctionne une API ?
+Une application envoie une requête (request)
+L’API traite la demande
+Elle renvoie une réponse (response)
+📦 Format souvent utilisé :
+JSON (le plus courant)
+parfois XML
+📡 3. Exemple concret
+Tu utilises une app météo :
+l’app ne connaît pas la météo directement
+elle demande à une API météo 🌦️
+l’API renvoie :
+température
+humidité
+prévisions
+🔧 4. Types d’API
+🌍 API Web (HTTP API)
+Utilisée sur internet :
+REST API (la plus courante)
+GraphQL (plus moderne)
+💻 API système
+Permet à un logiciel de parler au système :
+Windows API
+Android API
+📱 API mobile
+Utilisée par les applications smartphone
+⚙️ 5. Exemple de requête API (simplifié)
+GET https://api.meteo.com/paris
+Réponse :
+{
+  "ville": "Paris",
+  "temperature": 22,
+  "temps": "ensoleillé"
+}
+🔑 6. API Key (clé API)
+Beaucoup d’API demandent une clé :
+👉 comme un mot de passe
+Exemple :
+permet d’identifier l’utilisateur
+limite les abus
+contrôle les accès
+🛡️ 7. Sécurité des API
+Les API peuvent être protégées par :
+clés API 🔑
+tokens (JWT)
+HTTPS 🔐
+permissions (authentification)
+🚨 8. Risques des API mal sécurisées
+fuite de données
+accès non autorisé
+attaques automatisées
+surcharge du serveur
+📊 9. API dans la vie quotidienne
+Tu utilises des API sans t’en rendre compte :
+météo 🌦️
+Google Maps 🗺️
+Instagram / TikTok 📱
+paiements en ligne 💳
+jeux en ligne 🎮
+🧩 10. À retenir
+Une API, c’est :
+🔌 un pont qui permet à deux logiciels de communiquer et échanger des données`},
+{title:"HTTP",text:"Protocole web."},
+{title:"HTTPS",text:`🔐 Leçon sur HTTPS
+Le HTTPS est une version sécurisée du protocole HTTP, utilisé pour accéder aux sites web.
+👉 En simple : c’est le système qui permet de naviguer sur internet de façon chiffrée et sécurisée.
+🌐 1. HTTP vs HTTPS
+Protocole
+Signification
+Sécurité
+HTTP
+HyperText Transfer Protocol
+❌ non sécurisé
+HTTPS
+HTTP Secure
+🔐 sécurisé
+👉 HTTPS ajoute une couche de protection appelée chiffrement.
+🧠 2. Comment fonctionne HTTPS ?
+Quand tu visites un site HTTPS :
+ton navigateur se connecte au site
+ils s’échangent une clé de chiffrement
+toutes les données deviennent illisibles pour les autres
+📌 Résultat :
+tes mots de passe
+tes messages
+tes paiements
+👉 sont protégés
+🔐 3. Le cadenas 🔒
+Quand tu vois :
+🔒 https://
+Cela signifie :
+connexion chiffrée
+site vérifié (certificat SSL/TLS)
+🧾 4. Les certificats SSL/TLS
+Pour activer HTTPS, un site doit avoir un certificat de sécurité.
+👉 Il prouve que :
+le site est bien celui qu’il prétend être
+la connexion est chiffrée
+🧪 5. Exemple simple
+Sans HTTPS :
+quelqu’un sur le Wi-Fi peut intercepter tes données
+Avec HTTPS :
+même s’il intercepte, il ne comprend rien (données chiffrées)
+🛡️ 6. Pourquoi HTTPS est important ?
+Il protège contre :
+vol de mots de passe
+interception de données
+attaques “man-in-the-middle”
+espionnage sur Wi-Fi public
+⚠️ 7. Limites de HTTPS
+HTTPS ne protège pas contre tout :
+❌ ne bloque pas les virus
+❌ ne protège pas si le site est malveillant
+❌ ne rend pas anonyme
+👉 il protège فقط la connexion, pas le contenu du site
+🌍 8. Où HTTPS est utilisé ?
+Aujourd’hui :
+sites bancaires 💳
+réseaux sociaux 📱
+moteurs de recherche 🔎
+presque tous les sites modernes
+👉 HTTP seul devient rare
+🧩 9. À retenir
+HTTPS, c’est :
+🔐 un protocole qui chiffre les données entre ton appareil et un site web
+👉 il garantit confidentialité et sécurité des échanges`},
+{title:"SEO",text:`🔎 Leçon sur le SEO (Search Engine Optimization)
+Le SEO est l’ensemble des techniques utilisées pour améliorer la visibilité d’un site web sur les moteurs de recherche (comme Google).
+👉 En simple : c’est ce qui permet à un site d’apparaître plus haut dans les résultats quand tu fais une recherche.
+🧠 1. Comment fonctionne le SEO ?
+Quand tu recherches quelque chose :
+Google analyse des millions de pages
+Puis il classe les résultats selon :
+pertinence
+qualité du contenu
+vitesse du site
+popularité
+👉 Le SEO sert à “plaire” à ces critères.
+🌐 2. Les moteurs de recherche
+Les principaux :
+Google → le plus utilisé au monde
+Microsoft (via Bing) → moteur concurrent
+autres : DuckDuckGo, Yahoo
+⚙️ 3. Les 3 piliers du SEO
+🧱 SEO technique
+Tout ce qui concerne la structure du site :
+vitesse de chargement
+mobile-friendly 📱
+sécurité (HTTPS)
+architecture propre
+✍️ SEO contenu
+C’est ce que tu écris :
+mots-clés pertinents
+articles utiles
+titres clairs
+contenu complet et lisible
+🔗 SEO popularité (backlinks)
+Quand d’autres sites parlent de toi :
+liens entrants
+mentions
+réputation
+👉 Plus tu es cité, plus Google te fait confiance.
+🔑 4. Les mots-clés
+Un mot-clé, c’est ce que les gens tapent dans Google.
+Exemple :
+“meilleur VPN”
+“comment apprendre le hacking”
+“jeu gratuit PS5”
+👉 Le SEO consiste à utiliser ces mots intelligemment.
+📊 5. Exemple simple
+Sans SEO :
+ton site est page 10 → personne ne le voit
+Avec SEO :
+ton site est page 1 → beaucoup de visites
+🚀 6. Ce que Google aime
+contenu clair et utile
+sites rapides
+pages sécurisées
+expérience utilisateur propre
+contenu original
+⚠️ 7. Black hat SEO (à éviter)
+Certaines techniques “trichent” :
+bourrage de mots-clés
+faux liens
+contenu copié
+👉 Risque : Google peut pénaliser ou supprimer le site
+🧩 8. À retenir
+Le SEO, c’est :
+🔎 l’art de rendre un site visible sur les moteurs de recherche
+👉 objectif : attirer plus de visiteurs naturellement (sans pub payante)`}
+],
+
+"Réseau": [
+{title:"IP",text:`🌐 Leçon sur l’IP (Internet Protocol)
+Une adresse IP est un identifiant unique attribué à chaque appareil connecté à un réseau (internet ou local).
+👉 En simple : c’est la “plaque d’immatriculation” de ton appareil sur internet.
+🧠 1. À quoi sert une IP ?
+L’adresse IP permet de :
+identifier un appareil 📱💻
+envoyer et recevoir des données 📦
+communiquer sur internet 🌐
+👉 Sans IP, internet ne saurait pas où envoyer les informations.
+📡 2. Exemple simple
+Quand tu regardes une vidéo :
+YouTube doit savoir où envoyer la vidéo
+Donc :
+ton appareil a une IP
+le serveur YouTube a une IP
+les données circulent entre les deux
+🔢 3. Les types d’adresses IP
+🌍 IPv4
+Format classique :
+192.168.1.1
+4 blocs de chiffres
+le plus utilisé encore aujourd’hui
+limité en nombre d’adresses
+🚀 IPv6
+Format moderne :
+2001:0db8:85a3::8a2e:0370:7334
+beaucoup plus long
+presque illimité
+créé pour remplacer IPv4
+🏠 4. IP publique vs IP privée
+🌐 IP publique
+visible sur internet
+donnée par ton fournisseur internet
+identifie ton réseau (box)
+🏠 IP privée
+utilisée dans ta maison (Wi-Fi)
+attribuée par ta box
+ex : 192.168.x.x
+👉 ton téléphone et ton PC ont des IP privées différentes
+🔁 5. IP statique vs dynamique
+Type
+Description
+Statique
+ne change jamais
+Dynamique
+change régulièrement
+👉 la plupart des utilisateurs ont une IP dynamique
+🎮 6. IP dans les jeux et apps
+L’IP sert à :
+connecter les joueurs
+envoyer les actions en ligne
+synchroniser les serveurs
+👉 mais elle ne donne pas accès direct à ton appareil
+⚠️ 7. Ce que ton IP peut révéler
+Ton IP peut donner :
+ton pays 🌍
+ta ville approximative 📍
+ton fournisseur internet 📶
+❌ mais pas :
+ton nom
+ton adresse exacte
+tes mots de passe
+🛡️ 8. Sécurité de l’IP
+Risques possibles :
+attaques réseau (DDoS)
+traçage approximatif
+scan de ports
+👉 mais une IP seule ne suffit pas pour “pirater” quelqu’un
+🔒 9. Comment cacher son IP ?
+VPN 🔐 (ex : NordVPN / Proton VPN)
+proxy 🌐
+réseau Tor 🧅
+🧩 10. À retenir
+Une adresse IP, c’est :
+🌐 l’identifiant unique de ton appareil sur un réseau
+👉 elle permet aux données de savoir où aller et d’où venir.`},
+{title:"DNS",text:`🌐 Leçon sur le DNS (Domain Name System)
+Le DNS est un système qui sert à traduire les noms de sites web en adresses IP.
+👉 En simple : c’est le “annuaire d’internet”.
+🧠 1. Pourquoi le DNS existe ?
+Les ordinateurs ne comprennent pas les noms comme :
+google.com
+youtube.com
+Ils comprennent des adresses IP, par exemple :
+142.250.74.14
+👉 Le DNS fait la conversion :
+google.com → adresse IP du serveur Google
+⚙️ 2. Comment ça fonctionne ?
+Quand tu tapes un site :
+Tu écris www.youtube.com
+Ton appareil demande au DNS : “c’est quoi l’IP ?”
+Le DNS répond avec l’adresse IP
+Ton navigateur se connecte au serveur
+📌 Tout ça en quelques millisecondes ⚡
+📡 3. Exemple simple
+Sans DNS :
+tu devrais retenir des chiffres compliqués
+Avec DNS :
+tu tapes juste un nom facile
+🧩 4. Les types de DNS
+🏠 DNS de ton fournisseur (FAI)
+fourni par ton opérateur internet
+souvent automatique
+⚡ DNS publics
+🔵 Google DNS
+8.8.8.8
+rapide et fiable
+🟣 Cloudflare DNS
+1.1.1.1
+très rapide + orienté confidentialité
+🔁 5. DNS vs IP
+Élément
+Rôle
+Nom de domaine
+google.com
+DNS
+traduit le nom
+Adresse IP
+localisation du serveur
+⚡ 6. Pourquoi le DNS est important ?
+Sans DNS :
+internet serait très compliqué
+tu devrais mémoriser des IP
+Avec DNS :
+navigation simple
+accès rapide aux sites
+🚨 7. Problèmes DNS
+Parfois le DNS peut causer :
+sites qui ne chargent pas
+erreur “serveur introuvable”
+lenteur de navigation
+🛡️ 8. Sécurité DNS
+Un DNS peut être attaqué (DNS spoofing) : 👉 faux site renvoyé à la place du vrai
+C’est pour ça qu’on utilise :
+DNS sécurisés
+chiffrement (DNS over HTTPS)
+🔧 9. Comment changer son DNS ?
+Sur téléphone ou PC tu peux choisir :
+DNS rapide
+DNS sécurisé
+DNS avec filtrage (bloque pubs ou sites dangereux)
+🧩 10. À retenir
+Le DNS, c’est :
+🌐 le système qui transforme les noms de sites en adresses IP
+👉 sans lui, internet serait inutilisable pour les humains.`},
+{title:"WiFi",text:`📶 Leçon sur le Wi-Fi
+Le Wi-Fi est une technologie qui permet de connecter des appareils à internet sans fil, grâce à des ondes radio.
+👉 En simple : c’est un câble internet invisible.
+🧠 1. Comment fonctionne le Wi-Fi ?
+Le Wi-Fi passe par un appareil central :
+🌐 Internet → Routeur (box) → Wi-Fi → ton téléphone/PC
+📌 Le routeur transforme internet en ondes radio que tes appareils captent.
+📡 2. Les ondes Wi-Fi
+Le Wi-Fi utilise des ondes électromagnétiques :
+fréquence 2.4 GHz (longue portée, plus lente)
+fréquence 5 GHz (plus rapide, mais portée plus courte)
+parfois 6 GHz (Wi-Fi 6E) (très rapide, récent)
+⚡ 3. 2.4 GHz vs 5 GHz
+Bande
+Avantages
+Inconvénients
+2.4 GHz
+grande portée 📍
+plus lent, interférences
+5 GHz
+rapide ⚡
+portée plus faible
+🏠 4. Ce qui influence ton Wi-Fi
+📍 Distance
+Plus tu es loin de la box → signal plus faible
+🧱 Obstacles
+murs
+meubles
+béton
+👉 réduisent la puissance du signal
+📶 Interférences
+autres Wi-Fi voisins
+micro-ondes
+appareils Bluetooth
+📊 Nombre d’utilisateurs
+Plus il y a d’appareils → plus le Wi-Fi ralentit
+🎮 5. Wi-Fi et jeux en ligne
+Le Wi-Fi peut causer :
+lag
+ping instable
+packet loss
+👉 souvent moins stable qu’un câble Ethernet
+📉 6. Problèmes fréquents
+connexion qui coupe
+débit faible
+vidéos qui chargent lentement
+ping élevé en jeu
+🛡️ 7. Sécurité Wi-Fi
+Un Wi-Fi mal sécurisé peut être piraté.
+Bonnes pratiques :
+mot de passe fort
+chiffrement WPA2 / WPA3
+ne pas laisser le réseau ouvert
+🔧 8. Comment améliorer ton Wi-Fi
+rapprocher la box
+utiliser un répéteur Wi-Fi
+passer en 5 GHz si possible
+limiter les appareils connectés
+redémarrer la box
+utiliser un câble Ethernet pour le gaming
+📊 9. Wi-Fi vs Ethernet
+Wi-Fi
+Ethernet
+sans fil 📶
+câble 🔌
+pratique
+plus stable
+parfois instable
+très fiable
+un peu de latence
+faible latence
+🧩 10. À retenir
+Le Wi-Fi, c’est :
+📶 une connexion internet sans fil basée sur des ondes radio
+👉 pratique, mais moins stable qu’un câble.`},
+{title:"Packet",text:`📦 Leçon sur les “packets” (paquets réseau)
+Un packet (paquet de données) est une petite unité d’information envoyée sur un réseau (internet, Wi-Fi, etc.).
+👉 En simple : quand tu envoies une info sur internet, elle est coupée en petits morceaux appelés packets.
+🧠 1. Comment ça fonctionne ?
+Quand tu fais une action (ouvrir un site, envoyer un message, jouer en ligne) :
+tes données sont découpées en packets
+chaque packet voyage séparément
+ils arrivent au serveur
+ils sont réassemblés dans le bon ordre
+📌 Exemple :
+une image ou une vidéo = des centaines/milliers de packets
+🌐 2. Ce qu’il y a dans un packet
+Un packet contient 2 parties :
+📦 Données
+le contenu (texte, image, son…)
+🏷️ En-tête (header)
+adresse de l’expéditeur
+adresse du destinataire
+numéro du packet
+infos de contrôle
+🚚 3. Exemple simple
+Tu envoies un message :
+“Salut”
+Le réseau peut envoyer :
+Packet 1 : “Sa”
+Packet 2 : “lu”
+Packet 3 : “t”
+👉 Le serveur réassemble → “Salut”
+🎮 4. Packets dans les jeux vidéo
+Dans un jeu en ligne :
+ton mouvement = packets envoyés
+les autres joueurs = packets reçus
+👉 Si tout va bien :
+jeu fluide
+👉 Si problème :
+lag
+téléportation
+désynchronisation
+⚠️ 5. Packet loss (perte de packets)
+Parfois, des packets n’arrivent pas :
+❌ causes :
+Wi-Fi faible
+réseau saturé
+serveur instable
+👉 effets :
+freeze
+lag
+actions qui ne se valident pas
+📊 6. Latence vs Ping vs Packets
+Terme
+Signification
+Packet
+unité de données 📦
+Ping
+temps de réponse ⏱️
+Latence
+délai global du réseau 🌐
+🔁 7. Pourquoi on utilise des packets ?
+Parce que c’est :
+plus rapide
+plus fiable
+adaptable aux réseaux instables
+optimisé pour internet mondial
+🧩 8. À retenir
+Un packet, c’est :
+📦 un petit morceau de données envoyé sur internet
+👉 internet fonctionne comme un système de livraison de millions de petits colis.`},
+{title:"Ping",text:`📡 Leçon sur le ping
+Le ping est une mesure qui indique le temps que met un message à aller de ton appareil à un serveur puis à revenir.
+👉 En simple : c’est le temps de réponse d’une connexion internet.
+🧠 1. Comment ça fonctionne ?
+Ton ordinateur envoie un petit paquet de données appelé “ping” :
+Ton appareil → serveur → ton appareil
+⏱️ Le temps total de ce trajet = ping
+📌 Il est mesuré en millisecondes (ms).
+🎮 2. Ping en jeux vidéo
+Le ping est super important dans les jeux en ligne :
+tu cliques (tirer, sauter)
+le serveur reçoit l’action
+le serveur renvoie la réponse
+👉 Si le ping est élevé :
+décalage (lag)
+actions retardées
+impression de “freeze”
+📊 3. Valeurs de ping
+Ping
+Qualité
+Effet
+0–20 ms
+Excellent ⚡
+ultra fluide
+20–50 ms
+Très bon
+quasi parfait
+50–100 ms
+moyen
+léger délai
+100–200 ms
+mauvais
+lag visible
+200+ ms
+très mauvais
+injouable
+⚙️ 4. Ping vs latence
+👉 Les deux sont très proches :
+Latence = temps de réponse global
+Ping = mesure concrète de cette latence
+📌 En pratique, on utilise souvent “ping” pour parler de la latence réseau.
+🌐 5. Ce qui influence le ping
+📍 Distance du serveur
+Plus il est loin → ping plus élevé
+📶 Qualité de connexion
+Wi-Fi faible
+4G instable
+réseau saturé
+🖥️ Serveur surchargé
+Plus il y a de joueurs → plus lent
+🔁 Route des données
+Les données passent par plusieurs routeurs
+🧪 6. Exemple concret
+Serveur en France → ping 20 ms 🇫🇷
+Serveur aux USA → ping 120 ms 🇺🇸
+🛡️ 7. Comment réduire son ping ?
+utiliser un câble Ethernet
+se connecter à un serveur proche
+fermer les applications qui utilisent internet
+éviter le Wi-Fi saturé
+redémarrer routeur si nécessaire
+🔍 8. Comment tester son ping ?
+Tu peux :
+lancer un test de vitesse internet
+utiliser la commande ping sur PC
+regarder directement dans les jeux
+🧩 9. À retenir
+Le ping, c’est :
+⏱️ le temps de réponse entre toi et un serveur
+👉 plus il est bas → meilleure est la réactivité`},
+{title:"Latency",text:`⚡ Leçon sur la latence (Latency)
+La latence, c’est le temps de retard entre une action et sa réponse dans un système informatique ou réseau.
+👉 En simple : c’est le temps que met une information à voyager et revenir.
+🧠 1. Exemple simple
+Tu cliques sur une vidéo YouTube :
+clic → serveur reçoit la demande → vidéo commence
+⏱️ Le temps entre le clic et le début = latence
+🌐 2. Latence en réseau
+Dans internet, la latence correspond au temps que met un paquet de données pour aller :
+ton appareil → serveur → ton appareil
+📌 Elle est mesurée en millisecondes (ms)
+10 ms → très rapide ⚡
+50 ms → correct
+100+ ms → lag visible
+300+ ms → très lent (surtout en jeux)
+🎮 3. Latence dans les jeux vidéo
+La latence est cruciale dans le gaming :
+tu tires → le serveur réagit → l’action est visible
+👉 si la latence est élevée :
+décalage
+“lag”
+ennemis qui teleportent
+mauvaise réactivité
+📡 4. Ce qui cause la latence
+Plusieurs facteurs :
+📍 Distance
+Plus le serveur est loin → plus c’est lent
+🌐 Qualité de la connexion
+Wi-Fi faible
+réseau saturé
+4G/5G instable
+🖥️ Serveur lent
+Si le serveur est surchargé → délai
+📦 Route des données
+Les données passent par plusieurs “points” (routeurs)
+📊 5. Latence vs débit (important)
+Beaucoup confondent :
+Terme
+Signification
+Latence
+Temps de réponse ⏱️
+Débit
+Quantité de données 📥
+👉 Tu peux avoir :
+internet rapide MAIS avec du lag (latence élevée)
+internet lent MAIS réactif (latence faible)
+🧪 6. Exemple concret
+Vidéo streaming → besoin de bon débit
+Jeux en ligne → besoin de faible latence
+🧱 7. Comment réduire la latence ?
+utiliser Ethernet (câble)
+se rapprocher du Wi-Fi
+choisir un serveur proche
+fermer les apps en arrière-plan
+éviter les réseaux saturés
+🔬 8. Latence en informatique (plus large)
+La latence existe aussi dans :
+processeurs (CPU)
+mémoire RAM
+stockage SSD/HDD
+serveurs cloud
+👉 partout où il y a un délai entre action et réponse
+🧩 9. À retenir
+La latence, c’est :
+⏱️ le temps de réaction d’un système
+👉 plus elle est basse → meilleure est l’expérience`}
+],
+
+"Cybersecurité": [
+{title:"Firewall",text:`🧱 Leçon sur les Firewalls (pare-feu)
+Un firewall (pare-feu) est un système de sécurité qui sert à contrôler les connexions entre ton appareil et internet.
+👉 En simple : c’est un gardien qui décide ce qui peut entrer ou sortir de ton réseau.
+🧠 1. Comment fonctionne un firewall ?
+Quand une connexion arrive (jeu, site web, appli…) :
+le firewall analyse la connexion
+il compare avec des règles de sécurité
+il décide :
+✅ autoriser
+❌ bloquer
+📌 Exemple :
+ton navigateur → autorisé
+un programme suspect → bloqué
+🔐 2. À quoi sert un firewall ?
+🛡️ Protection contre les attaques
+Il bloque :
+intrusions de hackers
+accès non autorisés
+ports dangereux
+🌐 Contrôle du trafic internet
+Il peut filtrer :
+sites web
+applications
+connexions entrantes/sortantes
+🦠 Limiter les malwares
+Un malware qui essaie de “communiquer” avec internet peut être bloqué.
+🧱 3. Types de firewalls
+💻 Firewall logiciel
+Installé sur ton appareil (PC, téléphone)
+Exemple :
+Windows Defender Firewall
+👉 intégré à Windows, protège ton PC directement
+🌐 Firewall réseau
+Installé sur un routeur ou serveur
+👉 protège tout un réseau (école, entreprise, maison)
+☁️ Firewall cloud
+Géré en ligne par des services de sécurité
+👉 utilisé par les grandes entreprises
+⚙️ 4. Comment il décide ce qu’il bloque ?
+Il utilise des règles comme :
+adresse IP (qui envoie la connexion)
+port réseau (ex: 80, 443)
+type de programme
+protocole (HTTP, TCP, etc.)
+🚨 5. Exemple simple
+❌ Un programme inconnu essaie d’envoyer des données vers internet
+👉 firewall : bloque
+✔️ Ton navigateur ouvre un site connu
+👉 firewall : autorise
+⚠️ 6. Limites du firewall
+ne détecte pas toujours les virus dans les fichiers
+ne protège pas si tu installes un malware toi-même
+dépend des règles configurées
+👉 donc il ne remplace pas un antivirus
+🏢 7. Firewalls connus (entreprises)
+Cisco → solutions réseau très utilisées en entreprise
+pfSense → firewall open-source puissant pour réseaux
+🧩 8. À retenir
+Un firewall :
+surveille les connexions
+bloque les accès suspects
+protège ton réseau
+👉 C’est la première ligne de défense contre les attaques réseau.`},
+{title:"VPN",text:`🔐 Leçon sur les VPN (Virtual Private Network)
+Un VPN est un outil qui permet de créer une connexion internet sécurisée et chiffrée entre ton appareil et internet.
+👉 En simple : ça agit comme un tunnel privé entre toi et le web.
+🧠 1. Comment fonctionne un VPN ?
+Normalement :
+Ton appareil → Fournisseur internet → Sites web
+Avec un VPN :
+Ton appareil → Serveur VPN → Sites web
+📌 Résultat :
+ton IP est cachée
+tes données sont chiffrées
+ton trafic est plus difficile à surveiller
+🔒 2. À quoi sert un VPN ?
+🕵️‍♂️ Protection de la vie privée
+Ton fournisseur internet ne voit plus exactement ce que tu fais.
+🌍 Changer de localisation
+Tu peux apparaître dans un autre pays :
+France → USA
+France → Japon
+📶 Sécurité sur Wi-Fi public
+Très utile dans :
+cafés
+écoles
+gares
+👉 Ça évite que quelqu’un intercepte tes données.
+🚫 Contourner certaines restrictions
+sites bloqués
+contenus géo-limités
+⚠️ 3. Ce qu’un VPN ne fait PAS
+Beaucoup de gens se trompent :
+❌ Un VPN ne rend pas invisible
+❌ Un VPN ne protège pas contre tous les virus
+❌ Un VPN ne remplace pas un antivirus
+❌ Un VPN ne rend pas les actions illégales “safe”
+🧨 4. Les limites et risques
+certains VPN gratuits vendent tes données
+vitesse internet parfois réduite
+tous les sites ne sont pas compatibles
+confiance nécessaire envers le fournisseur
+🏆 5. Exemples de VPN connus
+🟢 NordVPN
+NordVPN Official Site⁠�
+👉 Très connu, bon niveau de sécurité et vitesse
+🟣 Proton VPN
+Proton VPN Official Site⁠�
+👉 Basé en Suisse, focus sur la confidentialité
+🔵 ExpressVPN
+ExpressVPN Official Site⁠�
+👉 Simple à utiliser, très populaire
+🛡️ 6. Comment bien choisir un VPN ?
+Regarde :
+politique “no logs” (pas d’enregistrement)
+vitesse
+pays de l’entreprise
+réputation
+transparence
+🧩 7. À retenir
+Un VPN sert surtout à :
+protéger ta vie privée
+sécuriser tes connexions
+masquer ton IP
+👉 Mais ce n’est pas une “armure magique”.`},
+{title:"Malware",text:`Un malware est un programme conçu pour nuire à un appareil, voler des données ou prendre le contrôle d’un système sans le consentement de l’utilisateur.
+🧠 1. C’est quoi un malware ?
+Le mot vient de “malicious software” (logiciel malveillant).
+Un malware peut :
+ralentir ton téléphone ou PC
+voler tes mots de passe
+espionner tes actions
+bloquer tes fichiers
+transformer ton appareil en “robot” contrôlé à distance
+🧨 2. Les principaux types de malwares
+🦠 Virus
+Se colle à un fichier ou programme et se propage quand tu l’ouvres.
+🪱 Ver (worm)
+Se propage tout seul sur les réseaux sans action de l’utilisateur.
+🐴 Trojan (cheval de Troie)
+Se cache dans un programme “normal” (jeu crack, appli fake…) 👉 Très utilisé pour tromper les victimes
+🕵️ Spyware
+Espionne l’utilisateur :
+clavier (keylogger)
+messages
+mots de passe
+caméra/micro parfois
+💣 Ransomware
+Chiffre tes fichiers et demande une rançon pour les récupérer.
+📢 Adware
+Affiche des pubs agressives ou injectées dans le système.
+🤖 Bot / Botnet
+Transforme ton appareil en machine contrôlée à distance (DDoS, spam, etc.)
+⚠️ 3. Comment les malwares infectent un appareil
+Les méthodes les plus courantes :
+télécharger des APK / logiciels crackés
+cliquer sur liens suspects (phishing)
+pièces jointes d’emails inconnus
+sites web infectés
+fausses mises à jour (“Update Flash Player”)
+clés USB infectées
+🚨 4. Symptômes d’un appareil infecté
+téléphone ou PC très lent
+batterie qui se vide vite
+pubs qui apparaissent toutes seules
+applications inconnues installées
+surchauffe
+connexions internet bizarres
+comptes piratés
+🛡️ 5. Comment se protéger
+installer uniquement des apps officielles (Play Store, App Store)
+éviter les cracks et APK inconnus
+garder le système à jour
+utiliser un antivirus fiable
+ne pas cliquer sur liens suspects
+vérifier les permissions des applications
+🔐 6. Exemple simple
+❌ Tu installes un “jeu gratuit modifié” → il contient un Trojan
+👉 résultat : vol de comptes + espionnage possible
+🧩 7. À retenir
+Un malware ne “se voit pas toujours”, il agit souvent en silence.
+👉 Les 3 règles d’or :
+méfiance des fichiers inconnus
+pas de liens suspects
+sources officielles uniquement`},
+{title:"Phishing",text:`Le phishing (hameçonnage) est une technique de fraude utilisée pour tromper une personne afin qu’elle divulgue des informations sensibles : mots de passe, codes bancaires, identifiants, etc.
+🧠 1. C’est quoi le phishing ?
+Le phishing consiste à se faire passer pour une entité fiable (banque, Google, Instagram, école, administration…) afin de te pousser à :
+cliquer sur un lien
+ouvrir une pièce jointe
+entrer tes informations personnelles
+🎯 2. Les objectifs des hackers
+Les attaquants veulent généralement :
+voler des mots de passe
+accéder à des comptes (réseaux sociaux, mail, banque)
+récupérer des données bancaires
+installer un malware
+usurper une identité
+📩 3. Les formes les plus courantes
+📧 Email phishing
+Un mail qui semble officiel :
+“Votre compte sera suspendu”
+“Connexion suspecte détectée”
+“Mise à jour obligatoire”
+👉 Il contient souvent un lien piégé.
+📱 SMS phishing (smishing)
+Messages du type :
+“Votre colis est bloqué”
+“Clique ici pour confirmer votre identité”
+📞 Vishing (par téléphone)
+Quelqu’un t’appelle en se faisant passer pour :
+ta banque
+un support technique
+un service officiel
+🌐 Faux sites web
+Des pages qui ressemblent à de vrais sites :
+Instagram fake login
+banque copiée
+Google falsifié
+⚠️ 4. Les signes d’une tentative de phishing
+Voici les alertes les plus importantes :
+orthographe bizarre ou fautes
+urgence (“agissez immédiatement”)
+lien suspect ou raccourci étrange
+adresse email étrange (ex: support@goog1e-security.xyz)
+demande de mot de passe (les vrais services ne demandent jamais ça par mail)
+sentiment de pression ou menace
+🧪 5. Exemple simple
+❌ Faux mail :
+“Votre compte Netflix sera fermé. Cliquez ici pour vérifier”
+✔️ Vrai réflexe :
+ne pas cliquer
+aller directement sur Netflix via l’application ou le site officiel
+🛡️ 6. Comment se protéger
+utiliser l’authentification à deux facteurs (2FA)
+vérifier les liens avant de cliquer
+ne jamais donner ses mots de passe
+utiliser un gestionnaire de mots de passe
+garder ses applications et son téléphone à jour
+🧩 7. Ce qu’il faut retenir
+Le phishing joue sur 3 choses :
+la peur
+l’urgence
+la confiance
+Si un message te pousse à agir vite → ⚠️ méfiance immédiate.
+🔐 Bonus (niveau cyber)
+Les attaques modernes peuvent être très sophistiquées :
+pages clonées quasi identiques
+mails très bien écrits
+usurpation de domaine (typosquatting)
+phishing ciblé (spear phishing)`},
+{title:"Cryptographie",text:`Leçon complète : La cryptographie
+La cryptographie est la science qui permet de protéger les informations en les transformant de manière à ce que seules les personnes autorisées puissent les lire ou les utiliser. Elle est au cœur de la sécurité sur Internet : navigation HTTPS, messageries sécurisées, paiements en ligne, signatures numériques, VPN, etc.
+1. Qu'est-ce que la cryptographie ?
+Le mot vient du grec :
+Kryptos = caché
+Graphia = écriture
+La cryptographie consiste à utiliser des algorithmes mathématiques pour assurer plusieurs objectifs de sécurité.
+2. Les objectifs de la cryptographie
+Confidentialité
+Seules les personnes autorisées peuvent lire les données.
+Exemple : un message chiffré.
+Intégrité
+Vérifier que les données n'ont pas été modifiées.
+Exemple : comparaison d'une empreinte (hash).
+Authentification
+Vérifier l'identité d'un utilisateur, d'un serveur ou d'un document.
+Non-répudiation
+Empêcher un auteur de nier qu'il a signé ou envoyé un document.
+3. Le vocabulaire
+Terme
+Définition
+Texte en clair
+Donnée lisible avant chiffrement
+Chiffrement
+Transformation du texte en clair
+Texte chiffré
+Résultat illisible sans la clé
+Déchiffrement
+Retour au texte original
+Clé
+Information utilisée par l'algorithme
+4. Comment fonctionne le chiffrement ?
+Texte clair
+      │
+      ▼
+ Algorithme + clé
+      │
+      ▼
+ Texte chiffré
+      │
+      ▼
+ Déchiffrement avec la clé appropriée
+      │
+      ▼
+ Texte clair
+5. Le chiffrement symétrique
+Une même clé sert à chiffrer et à déchiffrer.
+Clé secrète
+     │
+Alice ─────────► Bob
+Avantages
+Très rapide.
+Adapté aux gros volumes de données.
+Inconvénient
+Il faut transmettre la clé de manière sécurisée.
+Algorithmes connus
+Advanced Encryption Standard (AES)
+ChaCha20
+6. Le chiffrement asymétrique
+Deux clés différentes sont utilisées :
+Une clé publique (partagée).
+Une clé privée (gardée secrète).
+Clé publique  → Chiffrer
+Clé privée    → Déchiffrer
+Avantages
+Pas besoin de partager une clé secrète au départ.
+Permet les signatures numériques.
+Inconvénients
+Plus lent que le chiffrement symétrique.
+Algorithmes connus
+RSA (cryptosystem)
+Elliptic-curve cryptography (ECC)
+7. Pourquoi utiliser les deux ?
+Dans la pratique, les protocoles modernes combinent les deux approches :
+Le chiffrement asymétrique sert à établir ou échanger une clé de session.
+Le chiffrement symétrique protège ensuite les données, car il est beaucoup plus rapide.
+C'est notamment le principe utilisé par les connexions HTTPS.
+8. Les fonctions de hachage
+Une fonction de hachage produit une empreinte unique d'une donnée.
+Exemple d'usages :
+Vérification de fichiers.
+Signatures numériques.
+Stockage sécurisé des mots de passe (avec des fonctions adaptées).
+Des exemples de familles de hachage incluent SHA-2 et SHA-3.
+9. Les signatures numériques
+Une signature numérique permet de :
+prouver l'identité du signataire ;
+vérifier que le document n'a pas été modifié.
+Principe simplifié :
+Calcul d'un hash du document.
+Signature de ce hash avec la clé privée.
+Vérification avec la clé publique.
+10. Les certificats numériques
+Un certificat numérique associe une clé publique à une identité.
+Il est délivré par une autorité de certification (CA).
+Les navigateurs utilisent ces certificats pour vérifier l'identité des sites HTTPS.
+11. HTTPS
+Quand tu visites un site sécurisé :
+Navigateur
+      │
+      ▼
+ Échange sécurisé de clés
+      │
+      ▼
+ Chiffrement des données
+      │
+      ▼
+ Communication protégée
+Cela protège les échanges contre l'écoute sur le réseau.
+12. Les nombres aléatoires
+La sécurité dépend aussi de la qualité des nombres aléatoires utilisés pour générer des clés, des jetons et des paramètres cryptographiques.
+Un générateur faible peut compromettre un système pourtant basé sur de bons algorithmes.
+13. Les attaques courantes
+Quelques exemples :
+Attaque par force brute (essayer de nombreuses clés).
+Attaque par dictionnaire (tester des mots de passe courants).
+Attaque de l'homme du milieu (Man-in-the-Middle) si les échanges ne sont pas correctement authentifiés.
+Exploitation d'une mauvaise implémentation.
+Souvent, les erreurs de configuration ou de programmation sont plus dangereuses que les algorithmes eux-mêmes.
+14. Les bonnes pratiques
+Utiliser des algorithmes modernes et éprouvés.
+Maintenir les logiciels à jour.
+Employer des mots de passe longs et uniques.
+Activer l'authentification à plusieurs facteurs lorsque c'est possible.
+Ne pas créer son propre algorithme cryptographique.
+15. Où trouve-t-on la cryptographie ?
+Elle est utilisée dans :
+Les sites HTTPS.
+Les applications bancaires.
+Les messageries chiffrées.
+Les VPN.
+Les cartes bancaires.
+Les passeports électroniques.
+Les blockchains.
+Les signatures électroniques.
+Les mises à jour logicielles.
+16. Les principaux domaines de la cryptographie
+Cryptographie symétrique : protéger les données avec une clé secrète.
+Cryptographie asymétrique : échange de clés, authentification et signatures.
+Fonctions de hachage : intégrité et identification des données.
+Signatures numériques : preuve d'origine et d'intégrité.
+Protocoles cryptographiques : combinaison de plusieurs techniques pour sécuriser les communications (par exemple HTTPS).`},
+{title:"Hash",text:`Leçon complète : Les fonctions de hachage (Hash)
+Le hachage (hashing) est une technique fondamentale en informatique et en cybersécurité. Une fonction de hachage transforme une donnée (texte, fichier, mot de passe, image, etc.) en une empreinte numérique de longueur fixe appelée hash ou empreinte.
+1. Qu'est-ce qu'un hash ?
+Un hash est le résultat produit par une fonction de hachage.
+Exemple :
+Message :
+Bonjour
+
+Hash (SHA-256) :
+2ec5a3f0c2fc3e6dcee0f6f3a5735a6c69d2056579a5452095b75802094043a8
+Le hash est une représentation de la donnée, mais il ne permet pas de retrouver directement le contenu d'origine.
+2. À quoi sert un hash ?
+Les fonctions de hachage sont utilisées pour :
+Vérifier l'intégrité d'un fichier.
+Stocker des mots de passe de façon plus sûre (avec des techniques adaptées comme le salage et des fonctions spécialisées).
+Signer numériquement des documents.
+Identifier des fichiers.
+Détecter des modifications.
+3. Les propriétés d'une bonne fonction de hachage
+Une fonction de hachage cryptographique doit être :
+Déterministe
+La même entrée produit toujours le même hash.
+Bonjour
+↓
+
+Même hash
+Rapide à calculer
+Le calcul doit être efficace, même pour de gros fichiers.
+Sensible aux modifications
+Modifier un seul caractère change complètement le résultat.
+Exemple :
+Bonjour
+et
+bonjour
+produisent des hashes très différents.
+C'est ce qu'on appelle souvent l'effet avalanche.
+Résistante aux collisions
+Il doit être extrêmement difficile de trouver deux données différentes qui produisent le même hash.
+À sens unique
+Il n'existe pas de méthode pratique permettant de retrouver la donnée d'origine à partir du hash seul.
+4. Comment fonctionne un hash ?
+De manière simplifiée :
+Message
+     │
+     ▼
+Fonction de hachage
+     │
+     ▼
+Hash
+Quelle que soit la taille du message, la sortie a une longueur fixe (pour une fonction donnée).
+5. Longueur des hashes
+Quelques exemples :
+Algorithme
+Taille
+MD5
+128 bits
+SHA-1
+160 bits
+SHA-256
+256 bits
+SHA-512
+512 bits
+Les fonctions comme MD5 et SHA-1 ne sont plus recommandées pour des usages de sécurité en raison de vulnérabilités connues.
+6. Collision
+Une collision se produit lorsque deux données différentes produisent le même hash.
+Une bonne fonction de hachage rend ce phénomène extrêmement difficile à provoquer intentionnellement.
+7. Effet avalanche
+Changer un seul caractère modifie profondément le hash.
+Exemple :
+Bonjour
+↓
+Hash A
+BonjouR
+↓
+Hash B (très différent)
+Cette propriété aide à détecter toute modification, même minime.
+8. Hash et chiffrement : quelle différence ?
+Hachage
+Chiffrement
+À sens unique
+Réversible avec la bonne clé
+Sert à vérifier ou identifier
+Sert à protéger la confidentialité
+Ne nécessite pas de clé
+Utilise une ou plusieurs clés
+9. Vérification d'intégrité
+Quand un fichier est publié, son hash peut être fourni.
+Le destinataire :
+Télécharge le fichier.
+Calcule son hash.
+Compare avec le hash publié.
+Si les deux correspondent, cela indique que le fichier n'a probablement pas été modifié.
+10. Les mots de passe
+Les systèmes modernes ne stockent généralement pas les mots de passe en clair. Ils stockent une représentation dérivée obtenue avec des fonctions adaptées au stockage de mots de passe, souvent accompagnées d'un sel (salt) unique.
+Aujourd'hui, les fonctions recommandées incluent notamment Argon2id, bcrypt et scrypt, conçues pour résister davantage aux attaques.
+11. Les principales fonctions de hachage
+MD5
+Très rapide.
+Obsolète pour la sécurité.
+Encore utilisé dans certains contextes de vérification non critiques.
+SHA-1
+Plus robuste que MD5 à l'origine.
+Également considéré comme obsolète pour les usages de sécurité.
+SHA-2
+Famille comprenant :
+SHA-224
+SHA-256
+SHA-384
+SHA-512
+Très largement utilisée.
+SHA-3
+Nouvelle famille normalisée, reposant sur une conception différente de SHA-2.
+12. Applications
+Les fonctions de hachage sont utilisées pour :
+Vérifier les téléchargements.
+Les signatures numériques.
+Les certificats.
+Les systèmes de contrôle de versions.
+Les blockchains.
+Les bases de données.
+Les systèmes d'authentification.
+13. Bonnes pratiques
+Utiliser des algorithmes modernes et adaptés à l'usage.
+Ne pas utiliser MD5 ou SHA-1 pour de nouveaux systèmes de sécurité.
+Vérifier les empreintes des logiciels téléchargés lorsqu'elles sont publiées par une source officielle.
+Pour les mots de passe, utiliser des fonctions dédiées comme Argon2id, bcrypt ou scrypt, avec un sel unique.`}
+],
+
+"DarkWeb (Tor)": [
+{title:"Site Onion Market",text:`Liens commerciaux supplémentaires
+http://prjd5pmbug2cnfs67s3y65ods27vamswdaw2lnwf45ys3pjl55h2gwqd.onion/ – Hackers du Dark Web à louer
+http://55niksbd22qqaedkw36qw4cpofmbxdtbwonxam7ov2ga62zqbhgty3yd.onion/ – AccMarket – Comptes PayPal, eBay et bancaires premium
+http://s57divisqlcjtsyutxjz2ww77vlbwpxgodtijcsrgsuts4js5hnxkhqd.onion/ – Cardshop – Solde connu des CVV américains et cartes de crédit et CVV internationaux
+http://jbtb75gqlr57qurikzy2bxxjftzkmanynesmoxbzzcp7qf5t46u7ekqd.onion/ – Darkmining – Minage de Bitcoin avec de l'électricité volée
+http://jhi4v5rjly75ggha26cu2eeyfhwvgbde4w6d75vepwxt2zht5sqfhuqd.onion/ – Fonds d'investissement Bitcoin – gagnez 5 à 9 % par semaine !
+http://rxmyl3izgquew65nicavsk6loyyblztng6puq42firpvbe32sefvnbad.onion/ – Boutique de téléphonie mobile – Meilleur vendeur de téléphones portables débloqués
+http://vhlehwexxmbnvecbmsk4ormttdvhlhbnyabai4cithvizzaduf3gmayd.onion/ – Kamagra contre Bitcoin – Comme le Viagra, mais moins cher
+http://ymvhtqya23wqpez63gyc3ke4svju3mqsby2awnhd3bk2e65izt7baqad.onion/ – OnionIdentityServices – Faux passeports et cartes d'identité contre bitcoins
+http://k6m3fagp4w4wspmdt23fldnwrmknse74gmxosswvaxf3ciasficpenad.onion/ – Armurerie et munitions au Royaume-Uni
+http://lqcjo7esbfog5t4r4gyy7jurpzf6cavpfmc4vkal4k2g4ie66ao5mryd.onion/ – USfakeIDs – Boutique de fausses cartes d'identité américaines
+http://qazkxav4zzmt5xwfw6my362jdwhzrcafz7qpd5kugfgx7z7il5lyb6ad.onion/ – Contrefaçons de dollars américains – Faux dollars américains de haute qualité
+http://gd5x24pjoan2pddc2fs6jlmnqbawq562d2qyk6ym4peu5ihzy6gd4jad.onion/ – Citoyenneté américaine – Devenez citoyen des États-Unis
+http://t43fsf65omvf7grt46wlt2eo5jbj3hafyvbdb7jtr2biyre5v24pebad.onion/ – EuroGuns
+http://okayd5ljzdv4gzrtiqlhtzjbflymfny2bxc2eacej3tamu2nyka7bxad.onion/ – Apples4Bitcoin – iPhones, iPads et plus contre bitcoins
+http://3bp7szl6ehbrnitmbyxzvcm3ieu7ba2kys64oecf4g2b65mcgbafzgqd.onion/ – UKpassports – De vrais passeports britanniques
+http://xykxv6fmblogxgmzjm5wt6akdhm4wewiarjzcngev4tupgjlyugmc7qd.onion/ – ccPal – PayPal, eBay, cartes de crédit et plus
+http://kq4okz5kf4xosbsnvdr45uukjhbm4oameb6k6agjjsydycvflcewl4qd.onion/ – Rent-A-Hacker – Engagez un hacker contre des Bitcoins
+ : http://wk3mtlvp2ej64nuytqm3mjrm6gpulix623abum6ewp64444oreysz7qd.onion/ – Webuybitcoins – Vendez vos Bitcoins contre de l’argent liquide, PayPal, Western Union, etc. :
+http://odahix2ysdtqp4lgak4h2rsnd35dmkdx3ndzjbdhk3jiviqkljfjpmnqd.onion/ – HQER – Faux billets en euros de haute qualité`},
+{title:"Site Onion Bitcoin",text:`
+Anonymat Bitcoin
+http://y22arit74fqnnc2pbieq3wqqvkfub6gnlegx3cl6thclos4f7ya7rvad.onion/ – Dark Mixer – Mixeur Bitcoin anonyme
+http://hqfld5smkr4b4xrjcco7zotvoqhuuoehjdvoin755iytmpk4sm7cbwad.onion/ – Mixabit – Mixeur Bitcoin
+http://mp3fpv6xbrwka4skqliiifoizghfbjy5uyu77wwnfruwub5s4hly2oid.onion/ – EasyCoin – Portefeuille et mixeur Bitcoin
+http://p2qzxkca42e3wccvqgby7jrcbzlf6g7pnkvybnau4szl5ykdydzmvbid.onion/ – Onionwallet – Portefeuille et mixeur Bitcoin anonyme et sécurisé
+http://ovai7wvp4yj6jl3wbzihypbq657vpape7lggrlah4pl34utwjrpetwid.onion/ – VirginBitcoins – Achetez des bitcoins fraîchement minés et de haute qualité`},
+{title:"Onion Routing",text:`Leçon complète : L'Onion Routing (Routage en oignon)
+L'Onion Routing est une technique de communication anonyme qui constitue le principe de fonctionnement du réseau Tor. Son objectif est de rendre beaucoup plus difficile l'association entre un utilisateur et sa destination sur Internet.
+1. Définition
+Le routage en oignon consiste à faire passer les données par plusieurs relais successifs. Chaque relais ne connaît que :
+le relais précédent ;
+le relais suivant.
+Aucun relais ne connaît à la fois l'origine et la destination finale.
+L'image de l'« oignon » vient du fait que les données sont protégées par plusieurs couches de chiffrement, retirées une à une à chaque étape.
+2. Pourquoi utiliser l'Onion Routing ?
+Il sert à :
+protéger la confidentialité des communications ;
+limiter la possibilité de suivre un utilisateur à travers le réseau ;
+contourner certaines formes de censure ;
+permettre à des services sensibles (journalisme, recherche, droits humains) d'être accessibles de manière plus confidentielle.
+3. Les relais Tor
+Un circuit Tor est généralement composé de trois types de relais :
+Utilisateur
+      │
+      ▼
+ Relais d'entrée (Guard)
+      │
+      ▼
+ Relais intermédiaire
+      │
+      ▼
+ Relais de sortie
+      │
+      ▼
+ Internet
+Relais d'entrée (Guard)
+Premier relais du circuit.
+Il connaît ton adresse IP.
+Il ne connaît pas la destination finale.
+Relais intermédiaire
+Transmet les données.
+Ne connaît ni l'origine réelle ni la destination finale.
+Relais de sortie
+Dernier relais.
+Envoie la requête vers Internet (pour les sites classiques).
+Ne connaît pas l'identité de l'utilisateur.
+Pour les onion services, il n'y a généralement pas de relais de sortie vers Internet : la communication reste entièrement dans le réseau Tor.
+4. Les couches de chiffrement
+Avant d'envoyer un message, le client applique plusieurs couches de chiffrement.
+Schéma simplifié :
+Message
+   ↓
+Couche 3
+   ↓
+Couche 2
+   ↓
+Couche 1
+À chaque relais :
+une couche est retirée ;
+le relais obtient uniquement les informations nécessaires pour transmettre le message au relais suivant.
+5. Création d'un circuit
+De façon simplifiée :
+Le client sélectionne plusieurs relais.
+Il établit une connexion sécurisée avec chacun.
+Il construit un circuit.
+Les données circulent ensuite dans ce circuit jusqu'à son renouvellement.
+6. Pourquoi trois relais ?
+Trois relais offrent un bon compromis entre :
+confidentialité ;
+performances ;
+fiabilité.
+Ajouter davantage de relais augmenterait la latence sans forcément améliorer beaucoup la protection.
+7. Exemple de parcours
+Imaginons :
+Alice consulte un site web via Tor.
+Le trajet ressemble à ceci :
+Alice
+   │
+Guard
+   │
+Middle
+   │
+Exit
+   │
+Site Web
+Le site web voit principalement l'adresse IP du relais de sortie, pas celle d'Alice.
+8. Onion Routing et onion services
+Lorsqu'un utilisateur accède à un onion service :
+Utilisateur
+      │
+      ▼
+ Réseau Tor
+      │
+      ▼
+ Point de rendez-vous
+      │
+      ▼
+ Onion Service
+Le serveur et le client restent tous deux à l'intérieur du réseau Tor, sans exposer directement leurs adresses IP.
+9. Avantages
+Protection accrue de la vie privée.
+Pas de lien direct entre l'utilisateur et la destination.
+Architecture distribuée.
+Chiffrement des communications à l'intérieur du réseau Tor.
+10. Limites
+L'Onion Routing n'est pas une garantie d'anonymat absolu.
+Des facteurs comme :
+une mauvaise configuration ;
+des logiciels vulnérables ;
+des erreurs de l'utilisateur (par exemple révéler volontairement son identité) ;
+peuvent réduire la confidentialité.
+11. Différences avec un VPN
+Onion Routing
+VPN
+Plusieurs relais
+Un seul serveur
+Réseau décentralisé
+Fournisseur unique
+Aucun relais ne voit tout le trajet
+Le fournisseur VPN peut voir une grande partie du trafic qui le traverse
+Généralement plus lent
+Souvent plus rapide
+Les deux technologies répondent à des besoins différents et ne sont pas interchangeables.
+12. Concepts importants à connaître
+Pour aller plus loin, il est utile de comprendre :
+le chiffrement asymétrique ;
+les clés publiques et privées ;
+les circuits Tor ;
+les relais d'entrée (guards) ;
+les points d'introduction et de rendez-vous (pour les onion services) ;
+les descripteurs de services ;
+la différence entre anonymat, confidentialité et sécurité.`},
+{title:"Hidden Services",text:`Leçon : Les Hidden Services (Services cachés) sur le réseau Tor
+Objectif : Comprendre ce que sont les hidden services (aujourd'hui appelés onion services), comment ils fonctionnent, à quoi ils servent et quels sont leurs usages légitimes.
+1. Définition
+Un hidden service (ou onion service) est un service hébergé sur le réseau Tor, accessible uniquement via une adresse se terminant par .onion.
+Contrairement à un site web classique :
+Il n'est pas directement accessible depuis Internet.
+Son serveur n'expose pas son adresse IP publique.
+Les communications passent entièrement par le réseau Tor.
+2. Pourquoi les onion services existent-ils ?
+Ils ont été conçus pour protéger la confidentialité et l'anonymat.
+Usages légitimes :
+Journalisme dans des pays où la presse est censurée.
+Messageries sécurisées.
+Signalement anonyme d'informations.
+Hébergement de services sensibles.
+Recherche académique et cybersécurité.
+Comme toute technologie, ils peuvent aussi être détournés à des fins illégales, mais cela ne représente pas leur seul usage.
+3. Comment fonctionne Tor ?
+Tor fait passer les communications à travers plusieurs relais chiffrés.
+Schéma simplifié :
+Utilisateur
+      │
+      ▼
+ Relais d'entrée
+      │
+      ▼
+ Relais intermédiaire
+      │
+      ▼
+ Point de rendez-vous
+      │
+      ▼
+ Onion Service
+Chaque relais ne connaît qu'une partie du trajet, ce qui renforce la confidentialité.
+4. Les adresses .onion
+Une adresse .onion ressemble à une longue chaîne de caractères suivie de .onion.
+Caractéristiques :
+Générées à partir d'une clé cryptographique.
+Difficiles à mémoriser.
+Uniques.
+5. Les versions d'adresses
+Aujourd'hui, la version utilisée est v3.
+Les anciennes adresses v2 ont été abandonnées pour des raisons de sécurité.
+Les adresses v3 sont plus longues et offrent une meilleure protection cryptographique.
+6. Comment un client trouve un onion service ?
+À un niveau élevé :
+Le service publie des informations de connexion sur le réseau Tor.
+Le client récupère ces informations.
+Les deux parties établissent un point de rendez-vous au sein du réseau Tor.
+Une connexion chiffrée est créée sans que le client ou le serveur ne révèle directement son adresse IP.
+7. Sécurité
+Les avantages :
+Adresse IP du serveur masquée.
+Chiffrement de bout en bout au sein du réseau Tor.
+Résistance accrue à certaines formes de surveillance réseau.
+Les limites :
+Un service peut toujours être compromis par une mauvaise configuration ou des failles applicatives.
+L'anonymat dépend aussi des pratiques de l'utilisateur.
+8. Cas d'utilisation légitimes
+Portails d'information résistants à la censure.
+Dépôts de documents.
+Services de messagerie.
+Portails de signalement pour les lanceurs d'alerte.
+Sites d'organisations souhaitant offrir un accès via Tor.
+9. Bonnes pratiques
+Si tu explores des onion services :
+Utilise le navigateur Tor officiel.
+Vérifie les adresses .onion avant de les consulter.
+Évite de communiquer des informations personnelles.
+Garde ton navigateur et ton système à jour.
+Sois prudent face aux contenus frauduleux ou trompeurs.
+10. Mythes fréquents
+« Tout ce qui est sur Tor est illégal. »
+Faux. De nombreux services ont des usages légitimes.
+« Tor rend totalement anonyme. »
+Faux. Tor améliore la confidentialité, mais l'anonymat dépend aussi du comportement de l'utilisateur et de la sécurité de son appareil.
+« Les adresses .onion sont impossibles à retrouver. »
+Les adresses ne sont pas indexées comme le Web classique, mais certaines sont référencées volontairement par leurs propriétaires ou dans des annuaires spécialisés.
+11. Lien avec l'OSINT
+Pour les analystes OSINT, les onion services peuvent constituer une source d'information supplémentaire dans certains contextes (par exemple, des publications d'organisations ou des plateformes de divulgation). Cependant, ils ne remplacent pas les sources ouvertes du Web classique et doivent être évalués avec le même esprit critique : vérifier la provenance, recouper les informations et distinguer les faits des rumeurs.
+Niveau 1 : Les bases
+Commence par comprendre :
+Ce qu'est le réseau Tor.
+La différence entre Internet, le Deep Web et le Dark Web.
+Ce qu'est un onion service.
+Pourquoi les adresses se terminent par .onion.
+Les notions de chiffrement et de routage en oignon (onion routing).
+À maîtriser :
+Circuit Tor.
+Relais d'entrée, intermédiaires et de sortie.
+Point de rendez-vous.
+Clés publiques et privées.
+Niveau 2 : Fonctionnement d'un onion service
+Étudie l'architecture générale :
+Utilisateur
+      │
+      ▼
+  Réseau Tor
+      │
+      ▼
+ Point de rendez-vous
+      │
+      ▼
+ Onion Service
+Comprends les concepts suivants :
+Publication des descripteurs du service.
+Points d'introduction.
+Point de rendez-vous.
+Établissement de la connexion.
+Authentification cryptographique du service.
+Niveau 3 : Comprendre les adresses v3
+Les onion services modernes utilisent des adresses v3.
+Tu peux apprendre :
+Pourquoi elles sont longues.
+Comment elles sont dérivées d'une clé cryptographique.
+Pourquoi elles permettent de vérifier l'identité du service.
+Niveau 4 : Héberger un onion service (dans un laboratoire)
+Dans un environnement de test contrôlé, tu peux apprendre à :
+Installer Tor sur une machine.
+Configurer un service local (par exemple un petit serveur web).
+Publier ce service comme onion service.
+Tester son accessibilité avec le navigateur Tor.
+C'est une excellente façon de comprendre le fonctionnement interne sans exposer le service à Internet.
+Niveau 5 : Administration
+Apprends à :
+Lire les journaux (logs) de Tor.
+Comprendre les fichiers de configuration.
+Gérer les clés du service.
+Mettre à jour Tor.
+Sauvegarder correctement la configuration.
+Niveau 6 : Sécurité
+Étudie :
+Les bonnes pratiques de configuration.
+Les risques liés aux applications hébergées.
+Les fuites d'informations possibles.
+Les mises à jour de sécurité.
+La séparation entre le service et les données sensibles.
+Niveau 7 : Développement
+Si tu sais programmer, tu peux explorer :
+Des applications accessibles uniquement via un onion service.
+Des API internes.
+Des interfaces d'administration protégées.
+Des outils de test dans un laboratoire.
+Niveau 8 : OSINT et recherche
+Tu peux apprendre à :
+Identifier des onion services publiquement référencés.
+Vérifier la légitimité d'une adresse .onion.
+Croiser les informations avec des sources du Web classique.
+Évaluer la fiabilité d'un contenu.
+Compétences utiles à développer
+Pour bien comprendre les onion services, il est utile de connaître :
+Les bases des réseaux (TCP/IP, DNS, HTTP/HTTPS).
+Les fondamentaux de Linux.
+Les notions de cryptographie (clés, signatures, chiffrement).
+L'administration système.
+Les principes de la cybersécurité.
+Ressources recommandées
+Pour apprendre avec des sources fiables :
+La documentation officielle de Tor (Tor Project).
+Le manuel de Tor.
+Des livres sur les réseaux et la sécurité.
+Des laboratoires pratiques dans une machine virtuelle.`},
+{title:"OSINT",text:`Leçon complète sur l'OSINT (Open Source Intelligence)
+1. Qu'est-ce que l'OSINT ?
+L'OSINT (Open Source Intelligence), ou renseignement en sources ouvertes, consiste à collecter, analyser et exploiter des informations accessibles légalement au public.
+L'OSINT est utilisé par :
+Les forces de l'ordre
+Les journalistes
+Les enquêteurs privés
+Les entreprises
+Les chercheurs
+Les analystes en cybersécurité
+Les hackers éthiques (pentesters)
+L'objectif n'est pas de pirater un système, mais de trouver des informations disponibles publiquement.
+2. Les principes fondamentaux
+Une enquête OSINT repose sur quatre étapes :
+Collecte
+On rassemble les informations disponibles.
+Exemple :
+Nom
+Pseudonyme
+Email
+Numéro de téléphone
+Adresse
+Photos
+Entreprise
+Vérification
+Il faut toujours vérifier qu'une information est vraie.
+On croise plusieurs sources.
+Une seule source n'est jamais suffisante.
+Analyse
+On relie les informations entre elles.
+Exemple :
+Email → Réseaux sociaux → Entreprise → Photos → Localisation
+Rapport
+Les résultats sont présentés clairement avec les sources.
+3. Les différentes catégories d'OSINT
+Personnes
+Recherche de :
+Nom complet
+Alias
+Date de naissance (si publique)
+Réseaux sociaux
+Emploi
+Photos
+Publications
+Contacts
+Entreprises
+Recherche de :
+Employés
+Domaines internet
+Emails
+Fuites de données
+Organigramme
+Infrastructure informatique
+Sites Web
+Recherche de :
+Sous-domaines
+Technologies utilisées
+Hébergement
+DNS
+Certificats SSL
+Historique
+Réseaux sociaux
+Analyse de :
+Facebook
+Instagram
+TikTok
+X
+LinkedIn
+Reddit
+Images
+Analyse :
+Métadonnées (EXIF)
+Géolocalisation
+Recherche inversée
+Reconnaissance d'objets
+Documents
+Analyse :
+PDF
+Word
+Excel
+Métadonnées
+Auteur
+Logiciel utilisé
+4. Les sources d'information
+Sources publiques
+Sites web
+Blogs
+Forums
+Réseaux sociaux
+Sites gouvernementaux
+Journaux
+Bases de données
+Exemples :
+Registres des entreprises
+Cadastre (selon les pays)
+Registres judiciaires publics (lorsqu'ils existent)
+Brevets
+Publications scientifiques
+Archives
+Exemple :
+L'historique d'un site internet.
+Moteurs de recherche
+Les moteurs permettent déjà énormément de recherches.
+On peut utiliser :
+Google
+Bing
+DuckDuckGo
+5. Les Google Dorks
+Les Google Dorks permettent d'affiner les recherches.
+Exemples :
+site:example.com
+Recherche uniquement sur un site.
+filetype:pdf
+Recherche des PDF.
+intitle:"login"
+Recherche les pages contenant "login" dans le titre.
+inurl:admin
+Recherche des URL contenant "admin".
+"email@example.com"
+Recherche un email exact.
+6. Les outils OSINT les plus connus
+Recherche générale
+Maltego
+SpiderFoot
+Recon-ng
+Recherche d'emails
+Hunter.io
+EmailRep
+Domaines
+SecurityTrails
+DNSDumpster
+Sous-domaines
+Amass
+Subfinder
+Images
+Google Lens
+TinEye
+Géolocalisation
+Google Earth
+OpenStreetMap
+Métadonnées
+ExifTool
+7. Les réseaux sociaux
+Les réseaux sociaux sont une immense source d'informations.
+On peut y trouver :
+Localisation
+Famille
+Amis
+Habitudes
+Travail
+Centres d'intérêt
+Voyages
+Dates importantes
+8. Les métadonnées
+Les fichiers contiennent souvent :
+Auteur
+Date
+GPS
+Logiciel utilisé
+Appareil photo
+Modèle du téléphone
+Les métadonnées sont parfois supprimées lors de la publication sur certains réseaux sociaux.
+9. Les recherches inversées
+On peut rechercher :
+Une image
+Un visage
+Un logo
+Un bâtiment
+Pour retrouver :
+La source originale
+Une meilleure qualité
+D'autres sites utilisant la même image
+10. Les recherches sur les domaines
+Informations utiles :
+Propriétaire (si public)
+DNS
+Serveurs
+Sous-domaines
+Certificats
+Historique
+11. Les fuites de données
+Des services permettent de vérifier si une adresse e-mail apparaît dans une fuite de données connue. Ils ne donnent pas accès aux données privées, mais indiquent si un compte a été compromis et dans quel contexte. Si votre propre adresse apparaît, changez les mots de passe concernés et activez l'authentification à deux facteurs.
+12. Les bases de données publiques
+On peut consulter :
+Entreprises
+Marques
+Brevets
+Publications
+Décisions de justice publiques (selon les pays)
+Marchés publics
+13. Les techniques d'analyse
+Une bonne enquête consiste à :
+Identifier les informations clés.
+Vérifier les sources.
+Croiser les données.
+Établir une chronologie.
+Cartographier les relations.
+Documenter chaque conclusion.
+14. Les limites de l'OSINT
+L'OSINT ne permet pas de :
+Accéder à des comptes privés.
+Contourner des mots de passe.
+Pirater des systèmes.
+Obtenir des données non publiques sans autorisation.
+Usurper une identité.
+Il s'appuie uniquement sur des informations légalement accessibles.
+15. Les aspects juridiques et éthiques
+Un praticien de l'OSINT doit :
+Respecter la vie privée.
+Respecter les lois locales (par exemple le RGPD en Europe).
+Vérifier la fiabilité des informations.
+Éviter le harcèlement ou le doxxing.
+Utiliser les informations uniquement dans un cadre légal et légitime.
+16. Méthodologie d'une enquête OSINT
+Définir l'objectif.
+Identifier les sources pertinentes.
+Collecter les informations publiques.
+Vérifier et recouper les données.
+Analyser les relations et la chronologie.
+Rédiger un rapport clair avec les sources utilisées.
+17. Compétences utiles
+Pour progresser en OSINT, il est utile de développer :
+La pensée critique.
+La recherche avancée sur le Web.
+L'analyse de données.
+Les bases des réseaux informatiques et du DNS.
+La connaissance des réseaux sociaux.
+La rédaction de rapports.
+Le respect des règles juridiques et déontologiques.
+18. Domaines d'application
+L'OSINT est utilisé pour :
+La cybersécurité et le test d'intrusion.
+Les enquêtes journalistiques.
+La veille concurrentielle.
+La lutte contre la fraude.
+Les investigations numériques.
+La gestion des risques.
+Les enquêtes académiques.
+La réponse aux incidents de sécurité.
+Leçon 2 : Apprendre l'OSINT de A à Z (Cours pratique)
+Cette leçon est conçue pour t'apprendre la méthode, pas seulement les outils. Le plus important en OSINT est de savoir où chercher, comment vérifier et comment organiser les informations.
+Objectifs de la leçon
+À la fin de ce cours, tu sauras :
+Comprendre la démarche d'une enquête OSINT.
+Trouver des informations publiques de manière structurée.
+Vérifier la fiabilité des informations.
+Organiser tes découvertes.
+Produire un rapport clair.
+Chapitre 1 : L'état d'esprit d'un analyste
+Avant de chercher, pose-toi ces questions :
+Quel est mon objectif ?
+Quelles informations me manquent ?
+Où pourraient-elles être publiées ?
+Comment puis-je les vérifier ?
+Une enquête OSINT est un puzzle : chaque information est une pièce qui doit être confirmée par d'autres sources.
+Chapitre 2 : Définir un objectif
+Ne cherche jamais "tout". Définis une question précise.
+Exemples :
+Identifier le propriétaire d'un site web.
+Vérifier les informations publiques d'une entreprise.
+Reconstituer la chronologie d'un événement.
+Cartographier les sources publiques sur un sujet.
+Un objectif clair évite de se disperser.
+Chapitre 3 : Cartographier les sources
+Liste les catégories de sources qui pourraient répondre à ton objectif :
+Type de source
+Exemples
+Sites officiels
+Administrations, entreprises
+Médias
+Presse, communiqués
+Réseaux sociaux
+Publications publiques
+Bases de données
+Registres accessibles au public
+Images
+Photos, cartes, vues satellites
+Documents
+Rapports, PDF, présentations
+Chapitre 4 : Collecter les informations
+Lorsque tu trouves une information, note immédiatement :
+La source.
+La date.
+L'auteur (si connu).
+Le lien.
+Ce qui est un fait et ce qui est une hypothèse.
+Ne modifie pas les informations d'origine.
+Chapitre 5 : Vérifier les informations
+Une information n'est fiable que si elle peut être recoupée.
+Par exemple :
+Une annonce d'entreprise → vérifier sur le site officiel.
+Une photo → comparer avec d'autres images et le contexte.
+Une affirmation → rechercher si plusieurs sources indépendantes la confirment.
+Chapitre 6 : Construire une chronologie
+Classe les éléments par ordre temporel :
+Date
+Événement
+Source
+5 mars
+Publication A
+Source 1
+12 mars
+Publication B
+Source 2
+18 mars
+Déclaration C
+Source 3
+Une chronologie aide à comprendre les liens entre les événements.
+Chapitre 7 : Organiser les informations
+Tu peux utiliser une structure simple :
+Objectif
+│
+├── Personnes
+├── Organisations
+├── Lieux
+├── Documents
+├── Images
+└── Chronologie
+Cette organisation facilite l'analyse et la rédaction.
+Chapitre 8 : Évaluer la fiabilité
+Pose-toi ces questions :
+La source est-elle identifiable ?
+Est-elle récente ?
+A-t-elle un intérêt particulier à présenter les faits d'une certaine manière ?
+D'autres sources indépendantes confirment-elles ces informations ?
+Chapitre 9 : Erreurs fréquentes
+À éviter :
+Croire la première information trouvée.
+Confondre une hypothèse avec un fait.
+Oublier de noter les sources.
+Utiliser des informations sorties de leur contexte.
+Négliger la date de publication.
+Chapitre 10 : Rédiger un rapport
+Un bon rapport contient :
+L'objectif.
+La méthode utilisée.
+Les sources consultées.
+Les faits observés.
+Les limites de l'enquête.
+La conclusion.
+Les faits doivent être distingués des interprétations.
+Exercices
+Exercice 1 : Vérification d'une information
+Choisis un communiqué de presse ou un article d'actualité. Cherche au moins deux autres sources indépendantes qui confirment ou nuancent les informations principales.
+Exercice 2 : Analyse d'un site web
+Observe un site public et note :
+Les coordonnées de contact.
+Les pages importantes.
+Les documents téléchargeables.
+Les informations sur l'organisation.
+Les dates de mise à jour visibles.
+Exercice 3 : Chronologie
+À partir d'un événement public, crée une chronologie avec les annonces, articles et communiqués officiels.
+Conseils pour progresser
+Lis régulièrement des enquêtes journalistiques pour comprendre leur méthode.
+Entraîne-toi sur des sujets publics et légitimes.
+Documente toujours tes sources.
+Garde un esprit critique.
+Respecte les lois et la vie privée.
+Plan d'apprentissage sur 8 semaines
+Semaine 1 : principes de l'OSINT et recherche avancée sur le Web.
+Semaine 2 : analyse des sites web et des documents publics.
+Semaine 3 : recherche dans les registres publics et les bases de données.
+Semaine 4 : vérification des images et géolocalisation.
+Semaine 5 : analyse des réseaux sociaux et vérification des profils publics.
+Semaine 6 : organisation des données, chronologies et cartographie des relations.
+Semaine 7 : rédaction de rapports et évaluation de la fiabilité des sources.
+Semaine 8 : réalisation d'une enquête complète sur un sujet public en appliquant toutes les étapes précédentes.`},
+{title:"Dox",text:`Leçon Complète : Le Doxing (Document Intelligence & OSINT)
+Table des matières
+Définition et概念
+Légal et Éthique Cadre Légal et Éthique
+Méthodologie Générale
+Sources d'information (OSINT)
+Techniques de Collecte
+Corrélation et analyse
+Outils essentiels
+Cas pratiques
+Contre-mesures et protection
+Glossaire
+1. Définition et concepts
+Qu'est-ce que le Doxing ?
+Le doxing (ou doxxing , contraction de "dropping documents" ou "docs" ) est l'acte de rechercher et de publier des informations personnelles identifiables (PII) sur un individu ou une organisation à partir de sources publiques.
+
+Types d'informations recherchées
+
+
+Catégorie	Exemples
+Identité civile	Nom complet, date de naissance, numéro de sécurité sociale
+Coordonnées	Adresse postale, numéro de téléphone, email
+Numériques	Pseudo, adresses IP, comptes réseaux sociaux, handles
+Professionnels	Employeur, poste, diplômes, certifications
+Financières	Comptes bancaires, transactions, cryptomonnaies
+Famille/Entourage	Conjoint, enfants, parents, associés
+Activités	Centres d'intérêt, affiliations politiques, religieuses
+Objectifs courants
+Reconnaissance pré-attaque : phase de collecte d'informations sur une cible
+Audit de confidentialité : évaluation de l'exposition d'une personne ou d'une organisation
+Social Engineering : préparer des attaques d'ingénierie sociale ciblées
+Red teaming : simuler un adversaire déterminé
+2. Cadre Légal et Éthique
+Rappel important
+Le doxing sans autorisation est illégal dans la majorité des juridictions. Cette leçon est destinée exclusivement aux professionnels de la sécurité autorisés dans le cadre de missions légitimes (pentest, audit, red team).
+
+Réglementations applicables
+RGPD (UE) : ​​protection des données personnelles
+CCPA (Californie) : Loi californienne sur la protection de la vie privée des consommateurs
+Computer Fraud and Abuse Act (États-Unis) : accès non autorisé
+Code pénal (FR) : articles 226-1 à 226-24 (atteinte à la vie privée)
+Périmètre autorisé en pentest
+Informations publiquement accessibles (OSINT passif)
+Informations obtenues via des comptes test autorisés
+Dans le défini par le contrat de mission
+3. Méthodologie Générale
+Le doxing suit une approche méthodique en 5 phases :
+
+
+
+
+1. Identification Initiale
+   ↓
+2. Collecte (OSINT passif → actif)
+   ↓
+3. Corrélation & Recoupement
+   ↓
+4. Enrichissement
+   ↓
+5. Rapport & Documentation
+Phase 1 : Identification Initiale
+Sur une partie généralement d'un point d'entrée :
+
+Un pseudo / surnom
+Un email
+Un numéro de téléphone
+Un nom
+Une photo
+Un identifiant de compte (Steam, Discord, Twitter, etc.)
+Phase 2 : Collecte
+On distingue deux niveaux :
+
+OSINT Passif : collecte sans interaction directe avec la cible (moteurs de recherche, registres publics, réseaux sociaux)
+OSINT Actif : interaction contrôlée (requêtes DNS, WHOIS, scraping, social Engineering léger)
+Phase 3 : Corrélation
+C'est l'étape la plus critique : relier les fragments d'information entre eux pour reconstituer un profil complet.
+
+Techniques de corrélation :
+
+Email comme pivot : un email peut être lié à des comptes, des forums, des achats
+Pseudo commun : un même pseudo utilisé sur plusieurs plateformes
+Géolocalisation croisée : horaires de publication, fuseaux horaires, adresses IP
+Photo EXIF ​​: métadonnées GPS, appareil, date
+Phase 4 : Enrichissement
+Une fois un profil partiel établi, sur creuse :
+
+Recherche d'historiques (Wayback Machine, archives)
+Recherche de fuites / brèches (Have I Been Pwned)
+Recherche de comptes dormants ou oubliés
+Phase 5 : Rapport
+Documentation complète avec :
+
+Sources vérifiées
+Niveau de confiance par information
+Recommandations de remédiation
+4. Sources d'information (OSINT)
+4.1 Moteurs de Recherche
+
+
+Outil	Usage
+Google / Bing / Yandex	Recherche générale
+Google Dorks	Requêtes avancées (site:, intitle:, filetype:, inurl:)
+Shodan	Appareils connectés, services exposés
+Recensement	Analyse complète d'Internet
+PublicWWW	Recherche dans le code source des sites
+Principes fondamentaux de Google Dorks :
+
+texte
+
+
+
+"pseudo" site:linkedin.com
+"email@domain.com" filetype:pdf
+"nom prénom" site:facebook.com
+intitle:"cv" "nom" filetype:pdf
+4.2 Réseaux sociaux
+
+
+Plateforme	Informations exploitables
+Facebook	Amis, likes, groupes, lieu, emploi, photos
+LinkedIn	Parcours pro, compétences, connexions, recommandations
+Twitter/X	Bio, tweets géolocalisés, abonnements, interactions
+Instagram	Photos, hashtags, tags, stories à la une, bio
+Reddit	Historique des posts, commentaires, subreddits fréquents
+GitHub	Email dans les commits, projets, organisations, bio
+Discorde	ID unique, serveurs partagés, historique si accessible
+4.3 Registres publics
+WHOIS : propriétaires de domaines
+Registres d'entreprises : societe.com, Maison des Entreprises, SEC EDGAR
+Registres fonciers : propriétés immobilières
+Brevets : USPTO, OMPI
+Annonces légales : publications officielles
+Registres électoraux : dans certains pays
+4.4 Fuites de Données (Violations)
+Ai-je été piégé (HIBP)
+Déhaché
+LeakCheck
+IntelX
+Snusbase
+Scylla.donc
+4.5 Annuaires et Registres
+Pages Blanches / Pages Jaunes
+TruePeopleSearch (États-Unis)
+411.com
+Pipl (agrégateur)
+Porte-parole
+4.6 Techniques avancées
+Wayback Machine (archive.org) : historique des modifications d'un site
+DNS Dumpster / SecurityTrails : enregistrements DNS historiques
+Transparence des certificats (crt.sh) : certificats SSL/TLS émis
+Google Images / TinEye / Yandex Images : recherche par image inversée
+ExifTool : extraction de métadonnées EXIF
+5. Techniques de Collecte
+5.1 Recherche par e-mail
+frapper
+
+
+
+# Vérifier si un email est lié à un compte Gravatar
+https://www.gravatar.com/avatar/HASH_MD5_EMAIL
+
+# Vérifier si l'email est dans une breach (API HIBP)
+curl -H "hibp-api-key: VOTRE_CLE" https://haveibeenpwned.com/api/v3/breachedaccount/email@example.com
+
+# Vérifier les comptes associés (WhatMyInfo)
+5.2 Recherche par Pseudo
+KnowEm : vérifier la disponibilité d'un pseudo sur 500+ plateformes NameChk : similaire WhatsMyName : outil open-source
+
+5.3 Recherche par téléphone
+texte
+
+
+
+- Google : "+33XXXXXXXXX"
+- TrueCaller / Tellows : identification
+- WhatsApp : ajouter aux contacts
+- Telegram : rechercher par numéro
+- Facebook : fonction "Trouver des amis" → importer contacts
+5.4 Recherche par adresse IP
+frapper
+
+
+
+# Géolocalisation
+curl ipinfo.io/ADRESSE_IP
+
+# WHOIS IP
+whois ADRESSE_IP
+
+# Reverse DNS
+nslookup ADRESSE_IP
+dig -x ADRESSE_IP
+5.5 Recherche par Photo
+Google Images : recherche par image
+TinEye : recherche par empreinte digitale d'image
+Yandex : meilleur pour les visages
+PimEyes : recherche faciale
+FaceCheck.ID : recherche faciale
+5.6 Analyse de Métadonnées
+frapper
+
+
+
+# Extraction EXIF d'une photo
+exiftool photo.jpg
+
+# Informations utiles :
+# - GPS Latitude/Longitude
+# - Appareil (modèle, firmware)
+# - Date et heure
+# - Logiciel de retouche
+# - Copyright
+5.7 Recherche par Nom de Domaine
+frapper
+
+
+
+# WHOIS
+whois example.com
+
+# Certificats SSL (crt.sh)
+curl https://crt.sh/?q=%.example.com&output=json
+
+# DNS records
+dig example.com ANY
+dig example.com MX
+dig example.com TXT
+
+# Sous-domaines (Sublist3r, Amass)
+6. Corrélation et analyse
+6.1 La Matrice de Corrélation
+On construit une matrice où chaque ligne est un élément d'information et chaque colonne une source :
+
+
+
+Info	Source A	Source B	Source C	Corrélation
+Envoyez un courriel à jdoe@gmail.com	LinkedIn	GitHub	HIBP	Confirmé
+Tél +336XXXXXXXX	Facebook	Télégramme		Forte
+Pseudo "johndoe42"	Gazouillement	Reddit	Discorde	Confirmé
+Adresse : 123, rue Principale	LinkedIn	Registre électoral		Confirmé
+6.2 Techniques de Pivot
+Pivot par email :
+
+Email → LinkedIn → Nom complet
+Nom complet → Registre entreprise → Employeur
+Employeur → Collègues LinkedIn → Autres emails
+Email → HIBP → Anciens mots de passe
+Ancien mot de passe → Autres comptes (credential stuffing simulé)
+Pivot par pseudo :
+
+Pseudo → GitHub → Email dans les commits
+Pseudo → Twitter → Bio (site web, localisation)
+Site web → WHOIS → Nom/prénom
+Nom/prénom → Facebook → Amis, photos, lieu
+6.3 Récupération Temporel
+Analyser les horaires de publication permet de :
+
+Déterminer le fuseau horaire → localisation probable
+Déterminer les habitudes de sommeil → rythme de vie
+Croiser avec des événements connus
+6.4 Analyse de graphe social
+Outil : Maltego (ou Recon-ng , SpiderFoot )
+
+Construction d'un graphe avec :
+
+Nœuds : personnes, emails, téléphones, adresses, comptes
+Liens : relations (ami, collègue, famille, même IP, même appareil)
+7. Outils essentiels
+7.1 Cadres intégrés
+
+
+Outil	Description	Privilège
+Maltego	Analyse de graphe et corrélation CE/Paterva	
+Recon-ng	Cadre OSINT modulaire	Kali Linux
+Pied d'araignée	Automatisation OSINT, plus de 200 modules	
+le Moissonneur	Collecter les emails, sous-domaines, IP	
+OSINTgram	Instagram spécifique OSINT	
+Twint	OSINT Twitter (extraction de données sans API)	
+7.2 Moteurs de Recherche Spécialisés
+
+
+Outil	Usage
+Shodan	IoT, exposés sur les services, bannières
+Recensement	Scan internet large
+ZoomEye	Moteur de recherche cyberespace
+Hunter.io	Recherche d'emails par domaine
+Skype	Recherche de profils Skype
+Télégramme	Recherche dans groupes et canaux
+7.3 Automatisation
+Recon-ng — exemple de workflow :
+
+frapper
+
+
+
+recon-ng
+marketplace install all
+workspace create cible_john
+db insert companies
+modules/import/csv_file
+modules/recon/companies-contacts/bing_linkedin_cache
+modules/recon/contacts-domains/whois_pocs
+modules/recon/domains-hosts/bing_domain_web
+modules/recon/hosts-ports/masscan
+SpiderFoot — scan complet :
+
+frapper
+
+
+
+python3 sf.py -s "johndoe" -t all -o spiderfoot_report.html
+le Moissonneur :
+
+frapper
+
+
+
+theHarvester -d example.com -b google,linkedin,bing,yahoo
+7.4 Extraction et analyse
+curl / wget : récupération de pages
+BeautifulSoup / Scrapy (Python) : scraping
+jq : analyse JSON
+grep / sed / awk : shell d'extraction
+csvkit : manipulation de fichiers CSV
+8. Cas pratiques
+Cas 1 : OSINT sur un Pseudo
+Point de départ : pseudo "cyberwolF_42"
+
+Étapes :
+
+KnowEm → comptes actifs sur GitHub, Twitter, Reddit
+GitHub → email cyberwolf42@gmail.comdans les commits
+Courriel → HIBP → violation LinkedIn (2012, 2021)
+Breach LinkedIn → nom complet : "Jean Dupont"
+Nom complet → Google → entreprise : "ACME Corp"
+LinkedIn → confirmation, photo de profil
+Photo → Google Images → même photo sur un forum tech
+Forum → profil → ville : Lyon
+Wayback Machine → ancien site personnel → adresse IP
+Résultat : profil (pseudo → identité réelle → employeur → localisation → IP)
+
+Cas 2 : OSINT sur un email
+Point de départ :contact@startup-example.io
+
+Étapes :
+
+Hunter.io → 3 autres emails sur le même domaine
+WHOIS du domaine → protection de la vie privée activée
+crt.sh → certificats → sous-domaines ( admin.startup-example.io)
+Sous-domaine → Shodan → exposé de l'administrateur du panel
+GitHub → recherche contact@startup-example.io→ commits
+Commits → compte GitHub d'un développeur
+Développeur → contributions → infos dans le code
+LinkedIn → recherche par nom du développeur → équipe
+Facebook → photos taggées au bureau → adresse
+Cas 3 : Recherche par image
+Point de départ : photo de profil floue
+
+Yandex Images → meilleure qualité, même photo
+TinEye → sites où la photo est utilisée
+PimEyes → recherche faciale → autres photos
+Images Google → récupération
+Facebook → recherche par visage (si disponible)
+Instagram → recherche par visage
+9. Contre-Mesures et Protection
+9.1 Pour les Individus
+OpSec (Sécurité opérationnelle) de base :
+
+Pseudos uniques : utiliser un pseudo différent par plateforme
+Emails jetables : pour les inscriptions sans importance
+Vérifier ses expositions : HIBP, DeHashed régulièrement
+Supprimer les comptes inactifs : une source d'info dormante
+Paramètres de confidentialité : auditeur régulièrement
+Photos sans EXIF ​​: utiliser un outil comme ExifPurge
+VPN : pour masquer l'IP réelle
+Numéro virtuel : Google Voice, numéro Skype, etc.
+Recommandations avancées :
+
+Alertes Google : sur son nom, pseudo, email
+Désinscription des sites d'annuaire : pipl, spokeo, truepeoplesearch
+Confidentialité Whois : pour les propriétaires de domaines
+Comptes séparés : vie pro vs vie perso
+Ne pas utiliser le même pseudo sur GitHub que sur les réseaux sociaux
+9.2 pour les Organisations
+Politique OSINT : évaluer régulièrement l'exposition
+Formation des employés : Sensibilisation OpSec
+Réduction de la surface d'attaque : limiter les informations publiques
+Monitoring : détection de fuites de données
+Réponse à incident : procédure en cas de doxing
+9.3 Test de votre propre exposition
+frapper
+
+
+
+# Script basique de vérification
+
+# 1. Vérifier les breaches
+curl -s "https://haveibeenpwned.com/api/v3/breachedaccount/EMAIL"
+
+# 2. Vérifier les comptes associés
+# Utiliser Whatsmyname.app ou Namechk
+
+# 3. Vérifier Google Dorks sur soi
+# "nom prénom" site:pastebin.com
+# "nom prénom" filetype:pdf
+
+# 4. Vérifier les métadonnées de ses propres photos
+exiftool ~/Photos/ *.jpg | grep -i "gps\|lat\|lon\|location"
+
+# 5. Vérifier les certificats de son domaine
+curl -s "https://crt.sh/?q=%.mondomaine.com&output=json"
+10. Glossaire
+
+
+Terme	Définition
+Doxing / Doxing	Recherche et publication d'informations personnelles
+OSINT	Open Source Intelligence — collecte d'informations publiques
+PII	Informations personnellement identifiables — données personnelles
+OpSec	Sécurité opérationnelle — mesures de protection opérationnelle
+Pivoter	Technique de corrélation entre différentes sources
+Enfreindre	Fuite de données / violation de données
+EXIF	Exchangeable Image File Format — métadonnées d'image
+Google Dork	Demande Google avancée pour trouver des infos spécifiques
+Recherche d'images inversée	Recherche par image inversée
+Qui est	Registre des propriétaires de domaines
+Transparence des certificats	Registre public des certificats SSL/TLS émis
+SOCMINT	Social Media Intelligence — OSINT sur les réseaux sociaux
+GÉOINT	Intelligence géospatiale — informations géolocalisées
+Ressources complémentaires
+Sites utiles
+Ai-je été dupé ?
+Wayback Machine
+crt.sh
+Shodan
+Recensement
+Déhaché
+IntelX
+Namechk
+KnowEm
+Hunter.io
+Outils CLI (Kali Linux)
+frapper
+
+
+
+# Installation des outils essentiels
+sudo apt install theharvester recon-ng spiderfoot maltego exiftool whois
+
+# Outils additionnels
+sudo apt install sublist3r amass masscan nmap dnsutils
+Cadres complets
+Maltego CE : gratuit, puissant pour la corrélation graphique
+Recon-ng : framework modulaire, excellent pour l'automatisation
+SpiderFoot HX : version pro avec plus de 200 modules
+OSINT Framework : site web répertoriant tous les outils OSINT`},
+{title:"Liens Onion arme",text:`http://k6m3fagp4w4wspmdt23fldnwrmknse74gmxosswvaxf3ciasficpenad.onion/ – Armurerie et munitions au Royaume-Uni`},
+{title:"Liens Onion drog",text:`pharmacies
+http://wbz2lrxhw4dd7h5t2wnoczmcz5snjpym4pr7dzjmah4vi6yywn37bdyd.onion/ – DCdutchconnectionUK – Le lien néerlandais pour le Royaume-Uni
+http://iwggpyxn6qv3b2twpwtyhi2sfvgnby2albbcotcysd5f7obrlwbdbkyd.onion/ – DrChronic – De l'herbe directement de la source
+http://rfyb5tlhiqtiavwhikdlvb3fumxgqwtg2naanxtiqibidqlox5vispqd.onion/ – TomAndJerry – Cocaïne, héroïne, MDMA et LSD des Pays-Bas
+http://ajlu6mrc7lwulwakojrgvvtarotvkvxqosb4psxljgobjhureve4kdqd.onion/ – 420prime – Cannabis de qualité dispensaire en provenance du Royaume-Uni
+http://guzjgkpodzshso2nohspxijzk5jgoaxzqioa7vzy6qdmwpz3hq4mwfid.onion/ – Bitpharma – La plus grande pharmacie en ligne européenne
+http://n6qisfgjauj365pxccpr5vizmtb5iavqaug7m7e4ewkxuygk5iim6yyd.onion/ – EuCanna – Cannabis de première qualité
+http://kl4gp72mdxp3uelicjjslqnpomqfr5cbdd3wzo5klo3rjlqjtzhaymqd.onion/ – Smokeables – Le meilleur cannabis bio des États-Unis
+http://7mejofwihleuugda5kfnr7tupvfbaqntjqnfxc4hwmozlcmj2cey3hqd.onion/ – CannabisUK – Fournisseur de cannabis en gros au Royaume-Uni
+http://2ln3x7ru6psileh7il7jot2ufhol4o7nd54z663xonnnmmku4dgkx3ad.onion/ – Brainmagic – Les meilleurs psychédéliques du Darkweb
+http://usmost4cbpesx552s2s4ti3c4nk2xgiu763vhcs3b4uc4ppp3zwnscyd.onion/ – NLGrowers – Cannabis de qualité coffee shop en provenance des Pays-Bas
+http://xf2gry25d3tyxkiu2xlvczd3q7jl6yyhtpodevjugnxia2u665asozad.onion/ – Peoples Drug Store – Le meilleur fournisseur de drogues du Darkweb !
+http://sga5n7zx6qjty7uwvkxpwstyoh73shst6mx3okouv53uks7ks47msayd.onion/ – DeDope – Boutique de cannabis allemande`},
+{title:"Liens Onion autre",text:`
+Sites Wiki cachés
+http://s4k4ceiapwwgcm3mkb6e4diqecpo7kvdnfr5gg7sph7jjppqkvwwqtyd.onion/ – OnionLinks v3
+http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/ – The Hidden Wiki
+http://2jwcnprqbugvyi6ok2h2h7u26qc6j5wxm7feh3znlh2qu3h6hjld4kyd.onion/ – Another Hidden Wiki
+http://jgwe5cjqdbyvudjqskaajbfibfewew4pndx52dye7ug3mt3jimmktkid.onion/ – Pug's Ultimate Dark Web Guide
+http://zqktlwiuavvvqqt4ybvgvi7tyo4hjl5xgfuvpdf6otjiycgwqbym2qad.onion/wiki/index.php/Main_Page – Le wiki caché original
+
+Tout le reste
+http://danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion/ – DanielWin
+http://answerszuvs3gg2l64e6hmnryudl5zgrmwm3vh65hzszdghblddvfiqd.onion/ – Réponses cachées
+https://kcmykvkkt3umiyx4xouu3sjo6odz3rolqphy2i2bbdan33g3zrjfjgqd.onion/ – aboutMastodon
+http://dhosting4xxoydyaivckq7tsmtgi4wfs3flpeyitekkmqwu4v4r46syd.onion/ – Hébergement de Daniels
+http://cathug2kyi4ilneggumrenayhuhsvrgn6qv2y47bgeet42iivkpynqad.onion/ – Site de Cathugger :
+http://zgeajoabenj2nac6k5cei5qy62iu5yun5gm2vjnxy65r3p3amzykwxqd.onion/ – Blog du Darkweb :
+http://ozmh2zkwx5cjuzopui64csb5ertcooi5vya6c2gm4e3vcvf2c2qvjiyd.onion/ – riseup searx
+ : http://45tbhx5prlejzjgn36nqaxqb6qnm73pbohuvqkpxz2zowh57bxqawkid.onion/ – Site web de Parckwart :
+http://sidignlwz2odjhgcfhbueinmr23v5bubq2x43dskcebh5sbd2qrxtkid.onion/ – securejabber
+http://sik5nlgfc5qylnnsr57qrbm64zbdx6t4lreyhpon3ychmxmiem7tioad.onion/ – Qubes OS
+http://dds6qkxpwdeubwucdiaord2xgbbeyds25rbsgr73tbfpqpt4a6vjwsyd.onion/ – Whonix
+http://lldan5gahapx5k7iafb3s4ikijc4ni7gx5iywdflkba5y2ezyg6sjgyd.onion/ – OnionShare
+
+http://nanochanqzaytwlydykbg5nxkgyjxk3zsrctxuoxdmbx5jbh2ydyprid.onion/ – NanoChan
+http://picochanwvqfa2xsrfzlul4x4aqtog2eljll5qnj5iagpbhx2vmfqnid.onion/ – PicoChan
+http://enxx3byspwsdo446jujc52ucy2pf5urdbhqw3kbsfhlfjwmbpj5smdad.onion/ – EndChan
+http://dngtk6iydmpokbyyk3irqznceft3hze6q6rasrqlz46v7pq4klxnl4yd.onion/ – 256Chan
+http://cct5wy6mzgmft24xzw6zeaf55aaqmo6324gjlsghdhbiw5gdaaf4pkad.onion/ – Snopyta
+http://wnrgozz3bmm33em4aln3lrbewf3ikxj7fwglqgla2tpdji4znjp7viqd.onion/ – VYempire.xyz
+http://7sk2kov2xwx6cbc32phynrifegg6pklmzs7luwcggtzrnlsolxxuyfyd.onion/ – SystemLI.org
+http://stormwayszuh4juycoy4kwoww5gvcu2c4tdtpkup667pdwe4qenzwayd.onion/ – CryptoStorm VPN
+http://xdkriz6cn2avvcr2vks5lvvtmfojz2ohjzj4fhyuka55mvljeso2ztqd.onion/ – Cock.li
+http://eludemailxhnqzfmxehy3bk5guyhlxbunfyhkcksv4gvx6d3wcf6smad.onion/ – Elude.in
+http://lainwir3s4y5r7mqm3kurzpljyf77vty2hrrfkps6wm4nnnqzest4lqd.onion/ – qord11.net
+http://cgjzkysxa4ru5rhrtr6rafckhexbisbtxwg2fg743cjumioysmirhdad.onion/ – Course Enigma
+http://killnod2s77o3axkktdu52aqmmy4acisz2gicbhjm4xbvxa2zfftteyd.onion/ – Kill9
+http://digdeep4orxw6psc33yxa2dgmuycj74zi6334xhxjlgppw6odvkzkiad.onion/ – DigDeeper
+http://spywaredrcdg5krvjnukp3vbdwiqcv3zwbrcg6qh27kiwecm4qyfphid.onion/ – Spyware Watchdog
+http://meynethaffeecapsvfphrcnfrx44w2nskgls2juwitibvqctk2plvhqd.onion/ – May Vane Day Studios
+http://zsxjtsgzborzdllyp64c6pwnjz5eic76bsksbxzqefzogwcydnkjy3yd.onion/ – Shadow Wiki
+http://g7ejphhubv5idbbu3hb3wawrs5adw7tkx7yjabnf65xtzztgg4hcsqqd.onion/ – Defcon
+http://p53lf57qovyuvwsc6xnrppyply3vtqm7l6pcobkmyqsiofyeznfu5uqd.onion/ – Propublica
+http://darkzzx4avcsuofgfez5zq75cqc4mprjvfqywo45dfcaxrwqg6qrlfid.onion/ – Darknetlive
+http://keybase5wmilwokqirssclfnsqrjdsi7jdir5wy7y7iu3tanwmtp6oid.onion/ – KeyBase.IO
+http://ciadotgov4sjwlzihbbgxnqg3xiyrg7so2r2o3lt5wz5ypk4sxyjstad.onion/ – CIA.GOV
+http://archivebyd3rzt3ehjpm4c3bjkyxv3hjleiytnvxcn7x32psn2kxcuid.onion/ – Internet Archive
+http://bible4u2lvhacg4b3to2e2veqpwmrc2c3tjf2wuuqiz332vlwmr4xbad.onion/ – Bible4u
+http://kx5thpx2olielkihfyo4jgjqfb7zx7wxr3sd4xzt26ochei4m6f7tayd.onion/ – Bibliothèque Impériale
+http://nv3x2jozywh63fkohn5mwp2d73vasusjixn3im3ueof52fmbjsigw6ad.onion/ – Bandes dessinées.`}
+]
+};
+
+/* =========================
+   🎯 AFFICHAGE MENU
+   ========================= */
+
+const menu=document.getElementById("menu");
+
+function loadMenu(){
+    menu.innerHTML="";
+
+    for(let cat in data){
+        let div=document.createElement("div");
+        div.className="category";
+
+        let title=document.createElement("h2");
+        title.innerText=cat;
+
+        let grid=document.createElement("div");
+        grid.className="grid";
+
+        data[cat].forEach(item=>{
+            let btn=document.createElement("button");
+            btn.innerText=item.title;
+
+            btn.onclick=()=>{
+                openLesson(cat,item);
+            };
+
+            grid.appendChild(btn);
+        });
+
+        div.appendChild(title);
+        div.appendChild(grid);
+        menu.appendChild(div);
+    }
+}
+
+/* =========================
+   📖 OUVRIR LECON
+   ========================= */
+
+function openLesson(cat,item){
+    document.getElementById("menu").style.display="none";
+    document.getElementById("lesson").classList.remove("hidden");
+
+    document.getElementById("category").innerText=cat;
+    document.getElementById("title").innerText=item.title;
+    document.getElementById("text").innerText=item.text;
+}
+
+/* =========================
+   🔙 RETOUR MENU
+   ========================= */
+
+function backMenu(){
+    document.getElementById("menu").style.display="block";
+    document.getElementById("lesson").classList.add("hidden");
+}
+
+/* START */
+loadMenu();
+
+</script>
+
+</body>
+</html>
